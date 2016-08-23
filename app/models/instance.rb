@@ -5,6 +5,7 @@ class Instance < ApplicationRecord
   def set_defaults
     self.round ||= 0
     self.phase ||= 1
+    self.bank ||= 10000
   end
 
   def round_name

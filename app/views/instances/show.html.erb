@@ -6,6 +6,10 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Bank:</strong>
+  <%= number_to_currency(@instance.bank, precision: 0, format: "%n %u", unit: 'G. ') %>
+</p>
+<p>
   <strong>Phase:</strong>
   <%= @instance.phase %>
 </p>

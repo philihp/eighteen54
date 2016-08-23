@@ -1,5 +1,5 @@
 class InstancesController < ApplicationController
-  before_action :set_instance, except: [:index, :new ]
+  before_action :set_instance, except: [:index, :new, :create ]
 
   # GET /instances
   # GET /instances.json
