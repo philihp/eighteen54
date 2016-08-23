@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :players
   resources :instances do
+    resources :players
     member do
       post 'bump_phase'
       post 'bump_round'

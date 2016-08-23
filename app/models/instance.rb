@@ -1,5 +1,7 @@
 class Instance < ApplicationRecord
 
+  has_many :players
+
   after_initialize :set_defaults, unless: :persisted?
 
   def set_defaults
