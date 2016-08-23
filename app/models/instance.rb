@@ -29,14 +29,14 @@ class Instance < ApplicationRecord
   ###############
 
   def bump_round
-    round += 1
-    round = 1 if round > 4 or
+    self.round += 1
+    self.round = 1 if round > 4 or
                  round > 3 && phase <= 4 or
                  round > 2 && phase <= 2
   end
 
   def bump_phase
-    phase += 1
+    self.phase += 1
   end
 
 end
