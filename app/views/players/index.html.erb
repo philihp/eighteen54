@@ -16,9 +16,9 @@
       <tr>
         <td><%= player.name %></td>
         <td><%= player.instance %></td>
-        <td><%= link_to 'Show', player %></td>
-        <td><%= link_to 'Edit', edit_player_path(player) %></td>
-        <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [player.instance, player] %></td>
+        <td><%= link_to 'Edit', edit_instance_player_path(player.instance, player) %></td>
+        <td><%= link_to 'Destroy', [player.instance, player], method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
