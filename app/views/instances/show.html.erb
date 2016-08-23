@@ -1,9 +1,18 @@
+<%= link_to 'Edit', edit_instance_path(@instance) %> |
+<%= link_to 'Back', instances_path %>
+
+<h1>Show Instance <%= @instance.id %></h1>
+
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Phase:</strong>
+  <%= @instance.phase %>
+</p>
+<p>
   <strong>Round:</strong>
-  <%= @instance.round %>
+  <%= @instance.round_name.titleize %> (<%= @instance.round %>)
 </p>
 
-<%= link_to 'Edit', edit_instance_path(@instance) %> |
-<%= link_to 'Back', instances_path %>
+<%= link_to 'Bump Phase', bump_phase_instance_path(@instance), method: :post %>
+<%= link_to 'Bump Round', bump_round_instance_path(@instance), method: :post %>

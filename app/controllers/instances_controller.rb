@@ -1,5 +1,5 @@
 class InstancesController < ApplicationController
-  before_action :set_instance, only: [:show, :edit, :update, :destroy]
+  before_action :set_instance, except: [:index, :new ]
 
   # GET /instances
   # GET /instances.json
@@ -61,14 +61,25 @@ class InstancesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_instance
-      @instance = Instance.find(params[:id])
-    end
+  def bump_round
+    @instance.bump_round
+    redirect_to @instance
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def instance_params
-      params.require(:instance).permit(:round)
-    end
+  def bump_phase
+    @instance.bump_phase
+    redirect_to @instance
+  end
+
+private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_instance
+    @instance = Instance.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def instance_params
+    params.require(:instance).permit(:round)
+  end
 end
