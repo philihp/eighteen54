@@ -36,7 +36,7 @@ class Instance < ApplicationRecord
   end
 
   def bump_phase
-    self.phase += 1
+    self.phase += 1 if phase < 7
   end
 
 end
