@@ -27,18 +27,14 @@ class Instance < ApplicationRecord
     end
   end
 
-  ###############
-  # MUTATORS
-  ###############
-
-  def bump_round
+  def bump_round!
     self.round += 1
     self.round = 2 if round > 5 or
                  round > 4 && phase <= 4 or
                  round > 3 && phase <= 2
   end
 
-  def bump_phase
+  def bump_phase!
     self.phase += 1 if phase < 7
   end
 
