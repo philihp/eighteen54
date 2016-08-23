@@ -11,14 +11,16 @@ class Instance < ApplicationRecord
   def round_name
     case round
     when 0
-      'auction round'
+      'setup'
     when 1
-      'share round'
+      'auction round'
     when 2
-      'operating round 1'
+      'share round'
     when 3
-      'operating round 2'
+      'operating round 1'
     when 4
+      'operating round 2'
+    when 5
       'operating round 3'
     else
       '?'
@@ -31,9 +33,9 @@ class Instance < ApplicationRecord
 
   def bump_round
     self.round += 1
-    self.round = 1 if round > 4 or
-                 round > 3 && phase <= 4 or
-                 round > 2 && phase <= 2
+    self.round = 2 if round > 5 or
+                 round > 4 && phase <= 4 or
+                 round > 3 && phase <= 2
   end
 
   def bump_phase

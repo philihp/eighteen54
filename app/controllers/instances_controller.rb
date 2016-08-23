@@ -62,12 +62,14 @@ class InstancesController < ApplicationController
   end
 
   def bump_round
+    flash[:notice] = "Round bumped."
     @instance.bump_round
     @instance.save
     redirect_to @instance
   end
 
   def bump_phase
+    flash[:notice] = "Phase bumped."
     @instance.bump_phase
     @instance.save
     redirect_to @instance
