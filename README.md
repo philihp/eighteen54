@@ -20,6 +20,11 @@ this can be answered for you? Presumably a company would always want to operate 
 
 I'm writing this in stock Ruby on Rails 5, becuase how can you write a train game in anything other than Rails?
 
+## Getting Started
+
+Perhaps the best way to run this locally is with [Pow](http://pow.cx). It's stock Rails 5, batteries included,
+so just `rake db:migrate` and everything should run out of the box.
+
 ## Contributing
 
 If you're interested, please just contact me. I'd love some help. If the last commit is over a month old,
