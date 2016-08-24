@@ -11,7 +11,7 @@ class Instance < ApplicationRecord
     share_round: 2,
     operating_round_1: 3,
     operating_round_2: 4,
-    operating_round_3: 5
+    operating_round_3: 5,
   }
 
   def set_defaults
