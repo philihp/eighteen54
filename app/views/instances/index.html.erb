@@ -17,7 +17,7 @@
     <% @instances.each do |instance| %>
       <tr>
         <td><%= instance.phase %></td>
-        <td><%= instance.round_name %></td>
+        <td><%= instance.round %></td>
         <td><%= link_to 'Show', instance %></td>
         <td><%= link_to 'Edit', edit_instance_path(instance) %></td>
         <td><%= link_to 'Destroy', instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>

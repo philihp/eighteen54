@@ -1,8 +1,18 @@
 class Instance < ApplicationRecord
 
   has_many :players
+  validates_associated :players
 
   after_initialize :set_defaults, unless: :persisted?
+
+  enum round: {
+    setup: 0,
+    auction: 1,
+    share_round: 2,
+    operating_round_1: 3,
+    operating_round_2: 4,
+    operating_round_3: 5
+  }
 
   def set_defaults
     self.round ||= 0
@@ -10,34 +20,21 @@ class Instance < ApplicationRecord
     self.bank ||= 10000
   end
 
-  def round_name
-    case round
-    when 0
-      'setup'
-    when 1
-      'auction round'
-    when 2
-      'share round'
-    when 3
-      'operating round 1'
-    when 4
-      'operating round 2'
-    when 5
-      'operating round 3'
-    else
-      '?'
+  def from_round
+    case self.round.to_sym
+    when :setup
+      self.becomes(InstanceInSetup)
+    when :auction
+      self.becomes(InstanceInAuction)
+    when :share_round
+      self.becomes(InstanceInShareRound)
+    when :operating_round_1, :operating_round_2, :operating_round_3
+      self.becomes(InstanceInOperatingRound)
     end
   end
 
-  def bump_round!
-    self.round += 1
-    self.round = 2 if round > 5 or
-                 round > 4 && phase <= 4 or
-                 round > 3 && phase <= 2
-  end
-
   def bump_phase!
-    self.phase += 1 if phase < 7
+    self.phase += 1 if self.phase < 7
   end
 
 end

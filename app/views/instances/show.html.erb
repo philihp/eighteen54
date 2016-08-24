@@ -16,7 +16,7 @@
 </p>
 <p>
   <strong>Round:</strong>
-  <%= @instance.round_name.titleize %>
+  <%= @instance.round.to_s.titleize %>
 </p>
 
 <%= link_to 'Bump Phase', bump_phase_instance_path(@instance), method: :post %>

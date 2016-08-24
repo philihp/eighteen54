@@ -63,7 +63,7 @@ class InstancesController < ApplicationController
 
   def bump_round
     flash[:notice] = "Round bumped."
-    @instance.bump_round!
+    @instance.from_round.bump_round!
     @instance.save
     redirect_to @instance
   end
