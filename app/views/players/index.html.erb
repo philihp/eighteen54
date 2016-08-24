@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Back', @instance %></td> |
+<%= link_to 'New Player', new_instance_player_path %>
+
 <h1>Players</h1>
 
 <table>
@@ -23,7 +26,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Player', new_instance_player_path %>

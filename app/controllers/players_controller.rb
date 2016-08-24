@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
   # GET /players
   # GET /players.json
   def index
-    @players = Player.all
+    @players = @instance.players
   end
 
   # GET /players/1
@@ -16,6 +16,7 @@ class PlayersController < ApplicationController
   # GET /players/new
   def new
     @player = Player.new
+    @player.instance = @instance
   end
 
   # GET /players/1/edit
@@ -26,10 +27,11 @@ class PlayersController < ApplicationController
   # POST /players.json
   def create
     @player = Player.new(player_params)
+    @player.instance = @instance
 
     respond_to do |format|
       if @player.save
-        format.html { redirect_to [@instance, @player], notice: 'Player was successfully created.' }
+        format.html { redirect_to [@instance, 'players'], notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else
         format.html { render :new }
@@ -74,6 +76,6 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:name, :instance_id)
+      params.require(:player).permit(:name)
     end
 end

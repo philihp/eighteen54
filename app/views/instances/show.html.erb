@@ -1,9 +1,10 @@
+<p id="notice"><%= notice %></p>
+
 <%= link_to 'Edit', edit_instance_path(@instance) %> |
-<%= link_to 'Back', instances_path %>
+<%= link_to 'Back', instances_path %> |
+<%= link_to 'Players', instance_players_path(@instance) %>
 
 <h1>Show Instance <%= @instance.id %></h1>
-
-<p id="notice"><%= notice %></p>
 
 <p>
   <strong>Bank:</strong>
