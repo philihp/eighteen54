@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824073000) do
+ActiveRecord::Schema.define(version: 20160824084328) do
 
   create_table "instances", force: :cascade do |t|
     t.integer  "round"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20160824073000) do
     t.integer  "instance_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "wallet"
     t.index ["instance_id"], name: "index_players_on_instance_id"
   end
 
