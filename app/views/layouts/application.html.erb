@@ -9,6 +9,25 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">Eighteen54</a>
+        </div>
+        <% if content_for? :nav %>
+          <div id="navbar" class="navbar-collapse collapse">
+            <%= yield :nav %>
+          </div>
+        <% end %>
+      </div>
+    </nav>
+
+
+    <div class="container" role="main">
+
+      <%= yield %>
+
+    </div>
   </body>
 </html>
