@@ -62,16 +62,20 @@ class InstancesController < ApplicationController
   end
 
   def bump_round
-    flash[:notice] = "Round bumped."
-    @instance.from_round.bump_round!
-    @instance.save
+    begin
+      flash[:notice] = "Round bumped."
+      @instance.from_round.bump_round!
+      @instance.save
+    rescue
+      flash[:notice] = "Game require 3-6 players."
+    end
     redirect_to @instance
   end
 
   def bump_phase
-    flash[:notice] = "Phase bumped."
     @instance.bump_phase!
     @instance.save
+    flash[:notice] = "Phase bumped."
     redirect_to @instance
   end
 
@@ -84,6 +88,6 @@ private
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def instance_params
-    params.require(:instance).permit(:round)
+    params.require(:instance).permit(:round, :name)
   end
 end

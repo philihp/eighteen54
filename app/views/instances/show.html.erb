@@ -2,22 +2,12 @@
 
 <%= link_to 'Back', instances_path %> |
 <%= link_to 'Edit', edit_instance_path(@instance) %> |
-<%= link_to 'Players', instance_players_path(@instance) %>
+<%= link_to 'Players', instance_players_path(@instance) %> |
+<b>Bank</b> <%= number_to_currency(@instance.bank, precision: 0, format: "%n %u", unit: 'G. ') %> |
+<b>Phase</b> <%= @instance.phase %> |
+<b>Phase</b> <%= @instance.round.to_s.titleize %>
 
-<h1>Show Instance <%= @instance.id %></h1>
+<h1><%= @instance.name %></h1>
 
-<p>
-  <strong>Bank:</strong>
-  <%= number_to_currency(@instance.bank, precision: 0, format: "%n %u", unit: 'G. ') %>
-</p>
-<p>
-  <strong>Phase:</strong>
-  <%= @instance.phase %>
-</p>
-<p>
-  <strong>Round:</strong>
-  <%= @instance.round.to_s.titleize %>
-</p>
-
-<%= link_to 'Bump Phase', bump_phase_instance_path(@instance), method: :post %>
+<%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn', method: :post %>
 <%= link_to 'Bump Round', bump_round_instance_path(@instance), method: :post %>
