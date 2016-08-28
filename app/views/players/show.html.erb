@@ -1,9 +1,13 @@
 <% content_for :nav do %>
   <ul class="nav navbar-nav">
     <li><%= link_to 'Back', instance_players_path %></li>
-    <%#= link_to 'Edit', edit_instance_player_path(@player) %>
   </ul>
 <% end %>
+
+<p>
+  <strong>Instance:</strong>
+  <%= link_to 'Instance', @player.instance %>
+</p>
 
 <p>
   <strong>Name:</strong>
@@ -11,6 +15,6 @@
 </p>
 
 <p>
-  <strong>Instance:</strong>
-  <%= @player.instance %>
+  <strong>Wallet:</strong>
+  <%= guilder(@player.wallet) %>
 </p>

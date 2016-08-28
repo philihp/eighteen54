@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824084328) do
+ActiveRecord::Schema.define(version: 20160828030751) do
 
   create_table "instances", force: :cascade do |t|
     t.integer  "round"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.integer  "phase"
     t.integer  "bank"
     t.string   "name"
+    t.integer  "active_player_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -27,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160824084328) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "wallet"
+    t.integer  "turn_order"
     t.index ["instance_id"], name: "index_players_on_instance_id"
   end
 

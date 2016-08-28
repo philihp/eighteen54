@@ -6,9 +6,13 @@
   </ul>
 <% end %>
 
-<b>Bank</b> <%= number_to_currency(@instance.bank, precision: 0, format: "%n %u", unit: 'G. ') %> |
+<b>Bank</b> <%= guilder(@instance.bank) %> |
 <b>Phase</b> <%= @instance.phase %> |
-<b>Phase</b> <%= @instance.round.to_s.titleize %>
+<b>Round</b> <%= @instance.round.to_s.titleize %> |
+<b>Active Player</b>
+  <%= link_to [@instance, @instance.active_player] do %>
+    <% @instance.active_player.try(:name) || '(none)' %>
+  <% end %>
 
 <h1><%= @instance.name %></h1>
 

@@ -66,7 +66,7 @@ class InstancesController < ApplicationController
       @instance.from_round.bump_round!
       @instance.save
       flash[:success] = "A new round has begun. It is now #{@instance.round.titleize}"
-    rescue
+    rescue InstanceInSetup::WrongNumberOfPlayersError
       flash[:error] = "Game require 3-6 players."
     end
     redirect_to @instance

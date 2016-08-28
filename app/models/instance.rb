@@ -1,6 +1,7 @@
 class Instance < ApplicationRecord
 
-  has_many :players
+  has_many :players, -> { order(:turn_order) }
+  belongs_to :active_player, class_name: 'Player', optional: true
   validates_associated :players
 
   after_initialize :set_defaults, unless: :persisted?

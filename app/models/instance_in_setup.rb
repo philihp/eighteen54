@@ -3,7 +3,19 @@ class InstanceInSetup < Instance
   class WrongNumberOfPlayersError < StandardError
   end
 
+  class UnderfundedBankError < StandardError
+  end
+
   def bump_round!
+    socialize_the_bank!
+    randomize_player_order!
+    self.round = :auction
+  end
+
+private
+
+  def socialize_the_bank!
+    raise WrongNumberOfPlayersError if players.size < 3 || players.size > 6
     start_capital = case players.size
                     when 3
                       860
@@ -13,15 +25,22 @@ class InstanceInSetup < Instance
                       525
                     when 6
                       450
-                    else
-                      raise WrongNumberOfPlayersError
                     end
-
+    raise UnderfundedBankError if self.bank <= start_capital * players.size
     self.players.each do |player|
       player.wallet += start_capital
+      player.save
       self.bank -= start_capital
     end
-    self.auction!
+  end
+
+  def randomize_player_order!
+    shuffled = self.players.shuffle
+    shuffled.each_with_index do |player, index|
+      player.turn_order = index + 1
+      player.save
+    end
+    self.active_player = shuffled.first
   end
 
 end
