@@ -38,4 +38,11 @@ class Instance < ApplicationRecord
     self.phase += 1 if self.phase < 7
   end
 
+  def next_player!
+    next_turn_order = (self.active_player.turn_order + 1) % self.players.count
+    next_player = self.players.where(turn_order: next_turn_order).first
+    self.active_player = next_player
+    self.save
+  end
+
 end

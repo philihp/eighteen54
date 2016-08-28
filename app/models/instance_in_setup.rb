@@ -37,7 +37,7 @@ private
   def randomize_player_order!
     shuffled = self.players.shuffle
     shuffled.each_with_index do |player, index|
-      player.turn_order = index + 1
+      player.turn_order = index
       player.save
     end
     self.active_player = shuffled.first
