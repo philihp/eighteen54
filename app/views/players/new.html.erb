@@ -1,5 +1,7 @@
-<h1>New Player</h1>
+<% content_for :nav do %>
+  <ul class="nav navbar-nav">
+    <li><%= link_to 'Back', instance_players_path(@instance) %></li>
+  </ul>
+<% end %>
 
 <%= render 'form', instance: @instance, player: @player %>
-
-<%= link_to 'Back', instance_players_path %>

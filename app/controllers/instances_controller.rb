@@ -28,7 +28,7 @@ class InstancesController < ApplicationController
 
     respond_to do |format|
       if @instance.save
-        format.html { redirect_to @instance, notice: 'Instance was successfully created.' }
+        format.html { redirect_to @instance, flash: {success: 'Instance was successfully created.' }}
         format.json { render :show, status: :created, location: @instance }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class InstancesController < ApplicationController
   def update
     respond_to do |format|
       if @instance.update(instance_params)
-        format.html { redirect_to @instance, notice: 'Instance was successfully updated.' }
+        format.html { redirect_to @instance, flash: {success: 'Instance was successfully updated.' }}
         format.json { render :show, status: :ok, location: @instance }
       else
         format.html { render :edit }
@@ -56,16 +56,16 @@ class InstancesController < ApplicationController
   def destroy
     @instance.destroy
     respond_to do |format|
-      format.html { redirect_to instances_url, notice: 'Instance was successfully destroyed.' }
+      format.html { redirect_to instances_url, flash: {success: 'Instance was successfully destroyed.' }}
       format.json { head :no_content }
     end
   end
 
   def bump_round
     begin
-      flash[:success] = "A new round has begun. It is now #{@instance.round.titleize}"
       @instance.from_round.bump_round!
       @instance.save
+      flash[:success] = "A new round has begun. It is now #{@instance.round.titleize}"
     rescue
       flash[:error] = "Game require 3-6 players."
     end

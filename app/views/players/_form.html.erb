@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <%= f.hidden_field :instance_id, disabled: true %>
+  <div class="row top-buffer">
+    <div class="col-md-12">
+      <%= f.submit 'Add Player', class: 'btn btn-primary' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :instance_id %>
-    <%= f.text_field :instance_id, disabled: true %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>
