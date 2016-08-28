@@ -1,13 +1,16 @@
-<p id="notice"><%= notice %></p>
+<% content_for :nav do %>
+  <ul class="nav navbar-nav">
+    <li><%= link_to 'Back', instances_path %></li>
+    <li><%= link_to 'Edit', edit_instance_path(@instance) %></li>
+    <li><%= link_to 'Players', instance_players_path(@instance) %></li>
+  </ul>
+<% end %>
 
-<%= link_to 'Back', instances_path %> |
-<%= link_to 'Edit', edit_instance_path(@instance) %> |
-<%= link_to 'Players', instance_players_path(@instance) %> |
 <b>Bank</b> <%= number_to_currency(@instance.bank, precision: 0, format: "%n %u", unit: 'G. ') %> |
 <b>Phase</b> <%= @instance.phase %> |
 <b>Phase</b> <%= @instance.round.to_s.titleize %>
 
 <h1><%= @instance.name %></h1>
 
-<%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn', method: :post %>
-<%= link_to 'Bump Round', bump_round_instance_path(@instance), method: :post %>
+<%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
+<%= link_to 'Bump Round', bump_round_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>

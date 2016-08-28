@@ -1,6 +1,8 @@
-<%= link_to 'Back', instances_path %>
-
-<h1>Create Instance</h1>
+<% content_for :nav do %>
+  <ul class="nav navbar-nav">
+    <li><%= link_to 'Back', instances_path %></li>
+  </ul>
+<% end %>
 
 <%= render 'form', instance: @instance %>
 

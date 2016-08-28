@@ -3,14 +3,12 @@
   <head>
     <title>Eighteen54</title>
     <%= csrf_meta_tags %>
-
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="/">Eighteen54</a>
@@ -22,12 +20,22 @@
         <% end %>
       </div>
     </nav>
-
-
     <div class="container" role="main">
+      <% flash.each do |type, message| %>
+        <div class="alert <%= bootstrap_class_for(type) %> fade in">
+          <button class="close" data-dismiss="alert">×</button>
+          <strong><%= type.titleize %>!</strong>
+          <%= message %>
+        </div>
+      <% end %>
 
       <%= yield %>
 
     </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted pull-right">Made with &hearts; in San Francisco</p>
+      </div>
+    </footer>
   </body>
 </html>

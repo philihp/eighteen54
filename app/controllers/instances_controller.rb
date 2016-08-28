@@ -63,11 +63,11 @@ class InstancesController < ApplicationController
 
   def bump_round
     begin
-      flash[:notice] = "Round bumped."
+      flash[:success] = "A new round has begun. It is now #{@instance.round.titleize}"
       @instance.from_round.bump_round!
       @instance.save
     rescue
-      flash[:notice] = "Game require 3-6 players."
+      flash[:error] = "Game require 3-6 players."
     end
     redirect_to @instance
   end
@@ -75,7 +75,7 @@ class InstancesController < ApplicationController
   def bump_phase
     @instance.bump_phase!
     @instance.save
-    flash[:notice] = "Phase bumped."
+    flash[:success] = "The current instance's phase has moved forward. It is now phase #{@instance.phase}."
     redirect_to @instance
   end
 
