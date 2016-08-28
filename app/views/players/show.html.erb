@@ -1,7 +1,9 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_instance_player_path(@player) %> |
-<%= link_to 'Back', instance_players_path %>
+<% content_for :nav do %>
+  <ul class="nav navbar-nav">
+    <li><%= link_to 'Back', instance_players_path %></li>
+    <%#= link_to 'Edit', edit_instance_player_path(@player) %>
+  </ul>
+<% end %>
 
 <p>
   <strong>Name:</strong>
