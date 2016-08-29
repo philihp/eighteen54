@@ -1,1 +1,3 @@
-<h3><%= company.type %><h3>
+<%= link_to instance_company_path(@instance,company) do %>
+  <%= company.class.name.demodulize %>
+<% end %>
