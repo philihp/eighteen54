@@ -1,5 +1,5 @@
 module Company
-  class Salzkammergutbahn < Company
+  class Salzkammergutbahn < ::Company::Company
 
     def cost
       150

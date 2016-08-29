@@ -1,5 +1,5 @@
 module Company
-  class YbbstalerBahn < Company
+  class YbbstalerBahn < ::Company::Company
 
     def cost
       150

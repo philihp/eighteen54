@@ -1,5 +1,5 @@
 module Company
-  class Steyrtalbahn < Company
+  class Steyrtalbahn < ::Company::Company
 
     def cost
       150

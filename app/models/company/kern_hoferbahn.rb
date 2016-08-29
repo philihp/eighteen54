@@ -1,5 +1,5 @@
 module Company
-  class KernHoferbahn < Company
+  class KernHoferbahn < ::Company::Company
 
     def cost
       150

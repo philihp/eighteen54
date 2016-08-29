@@ -1,5 +1,5 @@
 module Company
-  class Mariazellerbahn < Company
+  class Mariazellerbahn < ::Company::Company
 
     def cost
       150

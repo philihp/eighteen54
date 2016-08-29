@@ -1,5 +1,5 @@
 module Company
-  class Phyrnbahn < Company
+  class Phyrnbahn < ::Company::Company
 
     def cost
       150

@@ -1,5 +1,5 @@
 module Company
-  class Ausserfernbahn < Company
+  class Ausserfernbahn < ::Company::Company
 
     def cost
       20

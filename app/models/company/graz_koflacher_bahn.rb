@@ -1,5 +1,5 @@
 module Company
-  class GrazKoflacherBahn < Company
+  class GrazKoflacherBahn < ::Company::Company
 
     def cost
       70

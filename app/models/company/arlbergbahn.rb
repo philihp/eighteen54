@@ -1,5 +1,5 @@
 module Company
-  class Arlbergbahn < Company
+  class Arlbergbahn < ::Company::Company
 
     def cost
       170

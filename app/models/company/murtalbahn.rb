@@ -1,5 +1,5 @@
 module Company
-  class Murtalbahn < Company
+  class Murtalbahn < ::Company::Company
 
     def cost
       50

@@ -1,5 +1,5 @@
 module Company
-  class Semmeringbahn < Company
+  class Semmeringbahn < ::Company::Company
 
     def cost
       190
