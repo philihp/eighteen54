@@ -1,6 +1,7 @@
 class Instance < ApplicationRecord
 
   has_many :players, -> { order(:turn_order) }
+  has_many :companies, class_name: 'Company::Company'
   belongs_to :active_player, class_name: 'Player', optional: true
   validates_associated :players
 
@@ -12,7 +13,7 @@ class Instance < ApplicationRecord
     share_round: 2,
     operating_round_1: 3,
     operating_round_2: 4,
-    operating_round_3: 5
+    operating_round_3: 5,
   }
 
   def set_defaults

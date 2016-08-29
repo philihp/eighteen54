@@ -79,6 +79,13 @@ class InstancesController < ApplicationController
     redirect_to @instance
   end
 
+  def next_player
+    @instance.next_player!
+    @instance.save
+    flash[:success] = "Active player passed to the next player."
+    redirect_to @instance
+  end
+
 private
 
   # Use callbacks to share common setup or constraints between actions.

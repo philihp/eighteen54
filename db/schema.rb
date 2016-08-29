@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828030751) do
+ActiveRecord::Schema.define(version: 20160829075657) do
+
+  create_table "companies", force: :cascade do |t|
+    t.integer  "instance_id"
+    t.integer  "director_id"
+    t.integer  "name"
+    t.integer  "scale"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.boolean  "tapped"
+    t.index ["director_id"], name: "index_companies_on_director_id"
+    t.index ["instance_id"], name: "index_companies_on_instance_id"
+  end
 
   create_table "instances", force: :cascade do |t|
     t.integer  "round"

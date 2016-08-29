@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     member do
       post 'bump_phase'
       post 'bump_round'
+      post 'next_player'
     end
   end
 end

@@ -9,6 +9,7 @@ class InstanceInSetup < Instance
   def bump_round!
     socialize_the_bank!
     randomize_player_order!
+    create_privates!
     self.round = :auction
   end
 
@@ -41,6 +42,14 @@ private
       player.save
     end
     self.active_player = shuffled.first
+  end
+
+  def create_privates!
+    self.companies << Company::Ausserfernbahn.new
+    self.companies << Company::Murtalbahn.new
+    self.companies << Company::GrazKoflacherBahn.new
+    self.companies << Company::Arlbergbahn.new
+    self.companies << Company::Semmeringbahn.new
   end
 
 end
