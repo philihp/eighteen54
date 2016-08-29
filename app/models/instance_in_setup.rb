@@ -45,11 +45,20 @@ private
   end
 
   def create_privates!
-    self.companies << Ausserfernbahn.new
-    self.companies << Murtalbahn.new
-    self.companies << GrazKoflacherBahn.new
-    self.companies << Arlbergbahn.new
-    self.companies << Semmeringbahn.new
+    # Mountains
+    self.companies << Company::Ausserfernbahn.new
+    self.companies << Company::Murtalbahn.new
+    self.companies << Company::GrazKoflacherBahn.new
+    # Locals 1-6
+    self.companies << Company::Mariazellerbahn.new
+    self.companies << Company::KernHoferbahn.new
+    self.companies << Company::YbbstalerBahn.new
+    self.companies << Company::Steyrtalbahn.new
+    self.companies << Company::Phyrnbahn.new
+    self.companies << Company::Salzkammergutbahn.new
+    # Mountains
+    self.companies << Company::Arlbergbahn.new
+    self.companies << Company::Semmeringbahn.new
   end
 
 end
