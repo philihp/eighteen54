@@ -14,12 +14,10 @@ ActiveRecord::Schema.define(version: 20160829075657) do
 
   create_table "companies", force: :cascade do |t|
     t.integer  "instance_id"
-    t.integer  "director_id"
     t.string   "type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "tapped"
-    t.index ["director_id"], name: "index_companies_on_director_id"
     t.index ["instance_id"], name: "index_companies_on_instance_id"
   end
 
