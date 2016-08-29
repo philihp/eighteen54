@@ -1,6 +1,7 @@
 module Company
   class Company < ApplicationRecord
     belongs_to :instance
+    belongs_to :director, class_name: 'Player'
 
     after_initialize :set_defaults, unless: :persisted?
 
