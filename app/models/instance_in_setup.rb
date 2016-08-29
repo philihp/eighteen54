@@ -45,11 +45,11 @@ private
   end
 
   def create_privates!
-    self.companies << Company::Ausserfernbahn.new
-    self.companies << Company::Murtalbahn.new
-    self.companies << Company::GrazKoflacherBahn.new
-    self.companies << Company::Arlbergbahn.new
-    self.companies << Company::Semmeringbahn.new
+    self.companies << Ausserfernbahn.new
+    self.companies << Murtalbahn.new
+    self.companies << GrazKoflacherBahn.new
+    self.companies << Arlbergbahn.new
+    self.companies << Semmeringbahn.new
   end
 
 end

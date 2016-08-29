@@ -15,8 +15,7 @@ ActiveRecord::Schema.define(version: 20160829075657) do
   create_table "companies", force: :cascade do |t|
     t.integer  "instance_id"
     t.integer  "director_id"
-    t.integer  "name"
-    t.integer  "scale"
+    t.string   "type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.boolean  "tapped"

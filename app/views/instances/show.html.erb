@@ -6,16 +6,24 @@
   </ul>
 <% end %>
 
-<b>Bank</b> <%= guilder(@instance.bank) %> |
-<b>Phase</b> <%= @instance.phase %> |
-<b>Round</b> <%= @instance.round.to_s.titleize %> |
-<b>Active Player</b>
-  <%= link_to [@instance, @instance.active_player] do %>
-    <% @instance.active_player.try(:name) || '(none)' %>
-  <% end %>
+<div class="row col-md-12">
+  <b>Bank</b> <%= guilder(@instance.bank) %> |
+  <b>Phase</b> <%= @instance.phase %> |
+  <b>Round</b> <%= @instance.round.to_s.titleize %> |
+  <b>Active Player</b>
+    <%= link_to [@instance, @instance.active_player] do %>
+      <% @instance.active_player.try(:name) || '(none)' %>
+    <% end %>
+</div>
+
+<div class="row col-md-12">
+  <%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
+  <%= link_to 'Bump Round', bump_round_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
+  <%= link_to 'Next Player', next_player_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
+</div>
 
 <h1><%= @instance.name %></h1>
 
-<%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
-<%= link_to 'Bump Round', bump_round_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
-<%= link_to 'Next Player', next_player_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
+<% @instance.companies.each do |company| %>
+  <%= render 'company', company: company %>
+<% end %>
