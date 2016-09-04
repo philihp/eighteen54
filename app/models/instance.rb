@@ -1,9 +1,18 @@
 class Instance < ApplicationRecord
 
-  has_many :players, -> { order(:turn_order) }
-  has_many :companies, class_name: 'Company::Company'
-  belongs_to :active_player, class_name: 'Player', optional: true
-  validates_associated :players
+  has_many :players,
+           -> { order(:turn_order) },
+           validate: true,
+           dependent: :destroy
+
+  has_many :companies,
+           class_name: 'Company::Company',
+           validate: true,
+           dependent: :destroy
+
+  belongs_to :active_player,
+             class_name: 'Player',
+             optional: true
 
   after_initialize :set_defaults, unless: :persisted?
 
