@@ -1,6 +1,10 @@
 module Company
   class GrazKoflacherBahn < ::Company::Company
 
+    def name
+      'Graz-Koflacher Bahn'
+    end
+
     def cost
       70
     end

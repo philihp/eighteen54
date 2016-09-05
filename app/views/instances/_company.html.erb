@@ -1,3 +1,24 @@
-<%= link_to instance_company_path(@instance,company) do %>
-  <%= company.class.name.demodulize %>
-<% end %>
+<tr>
+  <td>
+    <%= link_to instance_company_path(instance,company) do %>
+      <%= company.name %>
+    <% end %>
+  </td>
+  <td>
+    Cost <%= guilder(company.cost) %>
+  </td>
+  <td>
+    <% if company.income.present? %>
+      Income <%= guilder(company.income) %>
+    <% end %>
+  </td>
+  <td>
+    <% if instance.companies.first == company %>
+      <%= link_to 'Buy', '#', class: 'btn btn-default btn-xs', method: :post %>
+    <% elsif instance.auction? %>
+      <%= link_to 'Bid', '#', class: 'btn btn-default btn-xs', method: :post %>
+    <% else %>
+      ...
+    <% end %>
+  </td>
+</tr>

@@ -44,6 +44,10 @@ class Instance < ApplicationRecord
     end
   end
 
+  def auction?
+    self.round.to_sym == :auction
+  end
+
   def bump_phase!
     self.phase += 1 if self.phase < 7
   end

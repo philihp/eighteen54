@@ -1,3 +1,5 @@
+<%= stylesheet_link_tag 'instances', media: 'all', 'data-turbolinks-track': 'reload' %>
+
 <% content_for :nav do %>
   <ul class="nav navbar-nav">
     <li><%= link_to 'Back', instances_path %></li>
@@ -24,6 +26,11 @@
 
 <h1><%= @instance.name %></h1>
 
-<% @instance.companies.each do |company| %>
-  <%= render 'company', company: company %>
+<% if @instance.companies.present? %>
+  <h2>Companies</h2>
+  <table class="table">
+    <% @instance.companies.each do |company| %>
+      <%= render 'company', company: company, instance: @instance %>
+    <% end %>
+  </table>
 <% end %>

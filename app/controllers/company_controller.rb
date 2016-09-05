@@ -5,6 +5,9 @@ class CompanyController < ApplicationController
   def show
   end
 
+  def buy
+  end
+
   def bid
   end
 end

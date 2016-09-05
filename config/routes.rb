@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
   resources :instances do
     resources :players
-    resources :company
+    resources :company do
+      member do
+        post 'buy'
+        post 'bid'
+      end
+    end
     member do
       post 'bump_phase'
       post 'bump_round'

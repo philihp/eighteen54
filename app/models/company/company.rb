@@ -31,16 +31,20 @@ module Company
     #   'Lokalbahn AG C': 21,
     # }
 
+    def name
+      self.class.name.demodulize
+    end
+
     def set_defaults
       self.tapped = false
     end
 
     def cost
-      raise NotImplementedError, 'No cost defined for this company'
+      nil
     end
 
     def income
-      raise NotImplementedError, 'No income defined for this company'
+      nil
     end
 
   end
