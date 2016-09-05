@@ -1,8 +1,9 @@
 module Company
   class Ausserfernbahn < ::Company::Company
 
-    def cost
-      20
+    def set_defaults
+      super
+      self.cost = 20
     end
 
     def income

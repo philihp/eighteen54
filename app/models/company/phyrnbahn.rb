@@ -1,8 +1,9 @@
 module Company
   class Phyrnbahn < ::Company::Company
 
-    def cost
-      150
+    def set_defaults
+      super
+      self.cost = 150
     end
 
   end

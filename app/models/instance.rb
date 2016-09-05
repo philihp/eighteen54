@@ -8,7 +8,8 @@ class Instance < ApplicationRecord
   has_many :companies,
            class_name: 'Company::Company',
            validate: true,
-           dependent: :destroy
+           dependent: :destroy,
+           autosave: true
 
   belongs_to :active_player,
              class_name: 'Player',
@@ -19,16 +20,18 @@ class Instance < ApplicationRecord
   enum round: {
     setup: 0,
     auction: 1,
-    share_round: 2,
-    operating_round_1: 3,
-    operating_round_2: 4,
-    operating_round_3: 5,
+    auction_operating_round: 2,
+    share_round: 3,
+    operating_round_1: 4,
+    operating_round_2: 5,
+    operating_round_3: 6,
   }
 
   def set_defaults
     self.round ||= 0
     self.phase ||= 1
     self.bank ||= 10000
+    self.passes ||= 0
   end
 
   def from_round
@@ -39,7 +42,7 @@ class Instance < ApplicationRecord
       self.becomes(InstanceInAuction)
     when :share_round
       self.becomes(InstanceInShareRound)
-    when :operating_round_1, :operating_round_2, :operating_round_3
+    when :operating_round_1, :operating_round_2, :operating_round_3, :auction_operating_round
       self.becomes(InstanceInOperatingRound)
     end
   end
@@ -57,6 +60,12 @@ class Instance < ApplicationRecord
     next_player = self.players.where(turn_order: next_turn_order).first
     self.active_player = next_player
     self.save
+  end
+
+  def first_unowned_company
+    self.companies.find do |company|
+      company.director == nil
+    end
   end
 
 end

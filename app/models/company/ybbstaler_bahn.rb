@@ -1,12 +1,13 @@
 module Company
   class YbbstalerBahn < ::Company::Company
 
-    def name
-      'Ybbstaler Bahn'
+    def set_defaults
+      super
+      self.cost = 150
     end
 
-    def cost
-      150
+    def name
+      'Ybbstaler Bahn'
     end
 
   end

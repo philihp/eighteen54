@@ -1,5 +1,6 @@
 module Company
   class Company < ApplicationRecord
+
     belongs_to :instance
     belongs_to :director,
                class_name: 'Player',
@@ -37,14 +38,15 @@ module Company
 
     def set_defaults
       self.tapped = false
-    end
-
-    def cost
-      nil
+      self.cost ||= nil
     end
 
     def income
       nil
+    end
+
+    def buyable?
+      instance.first_unowned_company == self
     end
 
   end

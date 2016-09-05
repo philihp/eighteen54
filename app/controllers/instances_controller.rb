@@ -79,6 +79,23 @@ class InstancesController < ApplicationController
     redirect_to @instance
   end
 
+  def auction_pass
+    unless @instance.from_round.instance_of? InstanceInAuction
+      flash[:error] = "Can't pass in an auction unless the instance is currently in the auction phase"
+      return redirect_to @instance
+    end
+    result_message = @instance.from_round.pass!
+    @instance.save
+    flash[:success] = result_message
+    redirect_to @instance
+  end
+
+  def auction_buy
+    flash[:success] = @instance.from_round.buy!
+    @instance.save
+    redirect_to @instance
+  end
+
   def next_player
     @instance.next_player!
     @instance.save

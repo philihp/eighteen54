@@ -6,14 +6,16 @@ Rails.application.routes.draw do
     resources :players
     resources :company do
       member do
-        post 'buy'
         post 'bid'
       end
     end
     member do
-      post 'bump_phase'
-      post 'bump_round'
-      post 'next_player'
+      post 'bump_phase'  # debug
+      post 'bump_round'  # debug
+      post 'next_player' # debug
+
+      post 'auction_pass'
+      post 'auction_buy'
     end
   end
 end

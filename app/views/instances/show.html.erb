@@ -32,5 +32,9 @@
     <% @instance.companies.each do |company| %>
       <%= render 'company', company: company, instance: @instance %>
     <% end %>
+    <tr>
+      <td colspan="3"></td>
+      <td><%= link_to 'Pass', auction_pass_instance_path(@instance), class: 'btn btn-default btn-xs', method: :post %>
+    </tr>
   </table>
 <% end %>

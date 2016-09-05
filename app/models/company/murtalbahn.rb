@@ -1,8 +1,9 @@
 module Company
   class Murtalbahn < ::Company::Company
 
-    def cost
-      50
+    def set_defaults
+      super
+      self.cost = 50
     end
 
     def income

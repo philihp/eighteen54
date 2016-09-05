@@ -1,12 +1,13 @@
 module Company
   class GrazKoflacherBahn < ::Company::Company
 
-    def name
-      'Graz-Koflacher Bahn'
+    def set_defaults
+      super
+      self.cost = 70
     end
 
-    def cost
-      70
+    def name
+      'Graz-Koflacher Bahn'
     end
 
     def income

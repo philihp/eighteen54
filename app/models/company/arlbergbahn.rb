@@ -1,8 +1,9 @@
 module Company
   class Arlbergbahn < ::Company::Company
 
-    def cost
-      170
+    def set_defaults
+      super
+      self.cost = 170
     end
 
     def income
