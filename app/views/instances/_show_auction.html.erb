@@ -1,0 +1,23 @@
+
+<% if instance.auction? %>
+  <h2>Companies for Auction</h2>
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Bids/Director</th>
+      <th>Income</th>
+      <th></th>
+    </tr>
+    <% instance.companies.each do |company| %>
+      <%= render 'company_auction', company: company, instance: instance %>
+    <% end %>
+    <tr>
+      <td colspan="3"></td>
+      <td>
+        <% if instance.active_company.nil? %>
+          <%= link_to 'Pass', auction_pass_instance_path(instance), class: 'btn btn-primary btn-sm', method: :post %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+<% end %>

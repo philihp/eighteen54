@@ -18,3 +18,11 @@
   <strong>Wallet:</strong>
   <%= guilder(@player.wallet) %>
 </p>
+
+<h2>Director of Companies</h2>
+
+<ul class="list-unstyled">
+  <% @player.directorships.each do |company| %>
+    <li><%= company.name %></li>
+  <% end %>
+</ul>

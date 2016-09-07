@@ -76,6 +76,7 @@ class InstanceInAuction < Instance
       elsif c.bids.count == 0
         # Go back to general bidding with the option to buy the top
         self.active_player = self.priority
+        self.priority = nil
         self.active_company = nil
         self.save
         return

@@ -1,6 +1,7 @@
 class Player < ApplicationRecord
   belongs_to :instance
   has_many :bids
+  has_many :directorships, class_name: 'Company::Company', foreign_key: 'director_id'
 
   after_initialize :set_defaults, unless: :persisted?
 

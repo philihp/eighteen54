@@ -14,9 +14,15 @@
   <% if @instance.active_player.present? %>
     | <b>Active Player</b>
       <%= link_to [@instance, @instance.active_player] do %>
-        <% @instance.active_player.try(:name) || '(none)' %>
+        <% @instance.active_player.name %>
       <% end %>
     with <%= guilder(@instance.active_player.wallet) %>
+  <% end %>
+  <% if @instance.priority.present? %>
+   | <b>Priority</b>
+     <%= link_to [@instance, @instance.priority] do %>
+       <% @instance.priority.name %>
+     <% end %>
   <% end %>
 </div>
 
@@ -28,25 +34,4 @@
 
 <h1><%= @instance.name %></h1>
 
-<% if @instance.companies.present? %>
-  <h2>Companies</h2>
-  <table class="table">
-    <tr>
-      <th>Name</th>
-      <th>Bids/Director</th>
-      <th>Income</th>
-      <th></th>
-    </tr>
-    <% @companies.each do |company| %>
-      <%= render 'company_auction', company: company, instance: @instance %>
-    <% end %>
-    <tr>
-      <td colspan="3"></td>
-      <td>
-        <% if @instance.active_company.nil? %>
-          <%= link_to 'Pass', auction_pass_instance_path(@instance), class: 'btn btn-primary btn-sm', method: :post %>
-        <% end %>
-      </td>
-    </tr>
-  </table>
-<% end %>
+<%= render 'show_auction', instance: @instance %>
