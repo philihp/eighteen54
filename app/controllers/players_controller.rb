@@ -65,7 +65,7 @@ class PlayersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_player
       @player = Player.find(params[:id])
     end

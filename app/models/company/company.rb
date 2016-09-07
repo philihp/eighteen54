@@ -5,8 +5,12 @@ module Company
     belongs_to :director,
                class_name: 'Player',
                optional: true
+    has_many :bids,
+             -> { order(amount: :desc) },
+             class_name: 'Bid'
 
-    after_initialize :set_defaults, unless: :persisted?
+
+      after_initialize :set_defaults, unless: :persisted?
 
     # enum name: {
     #   'Außerfernbahn': 1,
@@ -47,6 +51,10 @@ module Company
 
     def buyable?
       instance.first_unowned_company == self
+    end
+
+    def minimum_bid
+      (bids.first.try(:amount) || cost) + 5
     end
 
   end

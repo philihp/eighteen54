@@ -7,8 +7,17 @@
   <td>
     <% if company.director.present? %>
       <%= company.director.name %>
-    <% else %>
-      <i>Cost <%= guilder(company.cost) %></i>
+    <% elsif company.bids.present? %>
+      <ul class="list-unstyled">
+        <% company.bids.each do |bid| %>
+          <li>
+            Bid of <%= guilder(bid.amount) %> by <%= bid.player.name %>
+            <% if !bid.is_high_bid? && bid.player == instance.active_player %>
+              <%= link_to 'Retract', instance_company_bid_path(instance, company, bid), method: :delete, class: 'btn btn-default btn-xs' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
     <% end %>
   </td>
   <td>
@@ -20,11 +29,20 @@
     <% if company.director.present? %>
       <%# nothing %>
     <% elsif company.buyable? %>
-      <%= link_to 'Buy', auction_buy_instance_path(instance), class: 'btn btn-default btn-xs', method: :post %>
+      <% if instance.active_player.wallet >= company.cost %>
+        <%= link_to "Buy for #{guilder(company.cost)}", auction_buy_instance_path(instance), class: 'btn btn-default btn-sm', method: :post %>
+      <% end %>
     <% elsif instance.auction? %>
-      <%= link_to 'Bid', bid_instance_company_path(instance, company), class: 'btn btn-default btn-xs', method: :post %>
+      <% if instance.active_player.can_bid_on(company) %>
+        <%= bootstrap_form_tag url: bid_instance_company_path(instance, company), layout: :inline  do |f| %>
+          <%=
+            f.number_field :amount, hide_label: true, class: 'input-sm', value: company.minimum_bid,
+                                    append: f.submit('Bid', class: 'btn btn-default btn-sm'),
+                                    wrapper: { style: 'width: 100px' }
+          %>
+        <% end %>
+      <% end %>
     <% else %>
-      ...
     <% end %>
   </td>
 </tr>

@@ -11,11 +11,14 @@
 <div class="row col-md-12">
   <b>Bank</b> <%= guilder(@instance.bank) %> |
   <b>Phase</b> <%= @instance.phase %> |
-  <b>Round</b> <%= @instance.round.to_s.titleize %> |
-  <b>Active Player</b>
-    <%= link_to [@instance, @instance.active_player] do %>
-      <% @instance.active_player.try(:name) || '(none)' %>
-    <% end %>
+  <b>Round</b> <%= @instance.round.to_s.titleize %>
+  <% if @instance.active_player.present? %>
+    | <b>Active Player</b>
+      <%= link_to [@instance, @instance.active_player] do %>
+        <% @instance.active_player.try(:name) || '(none)' %>
+      <% end %>
+    with <%= guilder(@instance.active_player.wallet) %>
+  <% end %>
 </div>
 
 <div class="row col-md-12">
@@ -29,12 +32,18 @@
 <% if @instance.companies.present? %>
   <h2>Companies</h2>
   <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Bids/Director</th>
+      <th>Income</th>
+      <th></th>
+    </tr>
     <% @instance.companies.each do |company| %>
       <%= render 'company', company: company, instance: @instance %>
     <% end %>
     <tr>
       <td colspan="3"></td>
-      <td><%= link_to 'Pass', auction_pass_instance_path(@instance), class: 'btn btn-default btn-xs', method: :post %>
+      <td><%= link_to 'Pass', auction_pass_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
     </tr>
   </table>
 <% end %>

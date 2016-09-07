@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   resources :instances do
     resources :players
-    resources :company do
+    resources :companies do
+      resources :bids, only: [:destroy]
       member do
         post 'bid'
       end
