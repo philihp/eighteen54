@@ -28,21 +28,18 @@
   <td>
     <% if company.director.present? %>
       <%# nothing %>
-    <% elsif company.buyable? %>
+    <% elsif company.buyable? && !instance.active_company.present? %>
       <% if instance.active_player.wallet >= company.cost %>
         <%= link_to "Buy for #{guilder(company.cost)}", auction_buy_instance_path(instance), class: 'btn btn-primary btn-sm', method: :post %>
       <% end %>
-    <% elsif instance.auction? %>
-      <% if instance.active_player.can_bid_on(company) %>
-        <%= bootstrap_form_tag url: bid_instance_company_path(instance, company), layout: :inline  do |f| %>
-          <%=
-            f.number_field :amount, hide_label: true, class: 'input-sm', value: company.minimum_bid,
-                                    append: f.submit('Bid', class: 'btn btn-primary btn-sm'),
-                                    wrapper: { style: 'width: 100px' }
-          %>
-        <% end %>
+    <% elsif instance.active_company.nil? || instance.active_company == company %>
+      <%= bootstrap_form_tag url: bid_instance_company_path(instance, company), layout: :inline  do |f| %>
+        <%=
+          f.number_field :amount, hide_label: true, class: 'input-sm', value: company.minimum_bid,
+                                  append: f.submit('Bid', class: 'btn btn-primary btn-sm'),
+                                  wrapper: { style: 'width: 100px' }
+        %>
       <% end %>
-    <% else %>
     <% end %>
   </td>
 </tr>

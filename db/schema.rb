@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160905213910) do
+ActiveRecord::Schema.define(version: 20160907085236) do
 
   create_table "bids", force: :cascade do |t|
     t.integer  "player_id"
@@ -36,15 +36,17 @@ ActiveRecord::Schema.define(version: 20160905213910) do
 
   create_table "instances", force: :cascade do |t|
     t.integer  "round"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "phase"
     t.integer  "bank"
     t.string   "name"
     t.integer  "active_player_id"
     t.integer  "passes"
-    t.integer  "company_to_auction_id"
-    t.index ["company_to_auction_id"], name: "index_instances_on_company_to_auction_id"
+    t.integer  "priority_id"
+    t.integer  "active_company_id"
+    t.index ["active_company_id"], name: "index_instances_on_active_company_id"
+    t.index ["priority_id"], name: "index_instances_on_priority_id"
   end
 
   create_table "players", force: :cascade do |t|

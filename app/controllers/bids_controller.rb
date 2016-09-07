@@ -10,11 +10,26 @@ class BidsController < ApplicationController
       return redirect_to @instance
     end
     player = @bid.player
+    company = @bid.company
+    amount = @bid.amount
     player.wallet += @bid.amount
     if player.save && @bid.destroy
-      flash[:success] = "Bid successfully retracted."
+      if company.being_auctioned?
+        if company.has_only_one_bid?
+          @instance.active_company = nil
+          @bid = company.bids.first
+          flash[:success] = "#{@bid.company.name} was purchased for #{@bid.amount} G. by #{@bid.player.name}"
+          @bid.execute!
+          @instance.from_round.next_auction!
+        else
+          flash[:success] = "Bid successfully retracted."
+          @instance.from_round.next_auction!
+        end
+      else
+        flash[:success] = "Bid successfully retracted."
+      end
     else
-      flash[:error] = "Unable to destroy bid."
+      flash[:error] = "Unable to retract bid."
     end
     redirect_to @instance
   end

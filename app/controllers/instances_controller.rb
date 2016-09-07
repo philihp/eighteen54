@@ -1,5 +1,5 @@
 class InstancesController < ApplicationController
-  before_action :set_instance, except: [:index, :new, :create ]
+  before_action :set_instance, except: [:index, :new, :create, :show ]
 
   # GET /instances
   # GET /instances.json
@@ -10,6 +10,8 @@ class InstancesController < ApplicationController
   # GET /instances/1
   # GET /instances/1.json
   def show
+    @instance = Instance.includes([:companies, :players]).find(params[:id])
+    @companies = @instance.companies.includes([:bids, :director])
   end
 
   # GET /instances/new
@@ -92,7 +94,6 @@ class InstancesController < ApplicationController
 
   def auction_buy
     flash[:success] = @instance.from_round.buy!
-    @instance.save
     redirect_to @instance
   end
 

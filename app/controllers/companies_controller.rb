@@ -30,7 +30,7 @@ class CompaniesController < ApplicationController
     @player.wallet -= bid.amount
 
     if @player.save && bid.save
-      @instance.next_player!
+      @instance.from_round.next_player!
       flash[:success] = "Bid #{bid.amount} G. on #{bid.company.name} by #{bid.player.name}"
       redirect_to @instance
     else

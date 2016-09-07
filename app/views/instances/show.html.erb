@@ -3,7 +3,6 @@
 <% content_for :nav do %>
   <ul class="nav navbar-nav">
     <li><%= link_to 'Back', instances_path %></li>
-    <%# <li><%= link_to 'Edit', edit_instance_path(@instance) </li> %>
     <li><%= link_to 'Players', instance_players_path(@instance) %></li>
   </ul>
 <% end %>
@@ -38,12 +37,16 @@
       <th>Income</th>
       <th></th>
     </tr>
-    <% @instance.companies.each do |company| %>
-      <%= render 'company', company: company, instance: @instance %>
+    <% @companies.each do |company| %>
+      <%= render 'company_auction', company: company, instance: @instance %>
     <% end %>
     <tr>
       <td colspan="3"></td>
-      <td><%= link_to 'Pass', auction_pass_instance_path(@instance), class: 'btn btn-primary btn-sm', method: :post %>
+      <td>
+        <% if @instance.active_company.nil? %>
+          <%= link_to 'Pass', auction_pass_instance_path(@instance), class: 'btn btn-primary btn-sm', method: :post %>
+        <% end %>
+      </td>
     </tr>
   </table>
 <% end %>

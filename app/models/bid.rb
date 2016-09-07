@@ -6,4 +6,10 @@ class Bid < ApplicationRecord
     self.company.bids.first == self
   end
 
+  def execute!
+    self.company.director = self.player
+    self.company.save
+    self.destroy
+  end
+
 end

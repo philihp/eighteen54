@@ -15,6 +15,15 @@ class Instance < ApplicationRecord
              class_name: 'Player',
              optional: true
 
+  belongs_to :priority,
+             class_name: 'Player',
+             optional: true
+
+  belongs_to :active_company,
+             class_name: 'Company::Company',
+             autosave: true,
+             optional: true
+
   after_initialize :set_defaults, unless: :persisted?
 
   enum round: {
@@ -57,13 +66,17 @@ class Instance < ApplicationRecord
 
   def next_player!
     next_turn_order = (self.active_player.turn_order + 1) % self.players.count
-    next_player = self.players.where(turn_order: next_turn_order).first
-    self.active_player = next_player
+    self.active_player = self.players.where(turn_order: next_turn_order).first
     self.save
   end
 
-  def first_unowned_company
-    self.companies.find do |company|
+  def next_player
+    next_turn_order = (self.active_player.turn_order + 1) % self.players.count
+    self.players.where(turn_order: next_turn_order).first
+  end
+
+  def unowned_companies
+    self.companies.find_all do |company|
       company.director == nil
     end
   end

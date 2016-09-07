@@ -50,11 +50,19 @@ module Company
     end
 
     def buyable?
-      instance.first_unowned_company == self
+      instance.unowned_companies.first == self
     end
 
     def minimum_bid
       (bids.first.try(:amount) || cost) + 5
+    end
+
+    def being_auctioned?
+      instance.active_company == self
+    end
+
+    def has_only_one_bid?
+      bids.count == 1
     end
 
   end
