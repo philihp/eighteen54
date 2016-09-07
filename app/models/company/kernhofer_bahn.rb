@@ -1,5 +1,9 @@
 module Company
-  class KernHoferbahn < ::Company::Company
+  class KernhoferBahn < ::Company::Company
+
+    def name
+      'Kernhofer Bahn'
+    end
 
     def set_defaults
       super

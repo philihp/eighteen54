@@ -51,7 +51,7 @@ private
     self.companies << Company::GrazKoflacherBahn.new
     # Locals 1-6
     self.companies << Company::Mariazellerbahn.new
-    self.companies << Company::KernHoferbahn.new
+    self.companies << Company::KernhoferBahn.new
     self.companies << Company::YbbstalerBahn.new
     self.companies << Company::Steyrtalbahn.new
     self.companies << Company::Phyrnbahn.new
