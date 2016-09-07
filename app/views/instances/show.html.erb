@@ -22,9 +22,9 @@
 </div>
 
 <div class="row col-md-12">
-  <%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
-  <%= link_to 'Bump Round', bump_round_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
-  <%= link_to 'Next Player', next_player_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
+  <%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
+  <%= link_to 'Bump Round', bump_round_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
+  <%= link_to 'Next Player', next_player_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
 </div>
 
 <h1><%= @instance.name %></h1>
@@ -43,7 +43,7 @@
     <% end %>
     <tr>
       <td colspan="3"></td>
-      <td><%= link_to 'Pass', auction_pass_instance_path(@instance), class: 'btn btn-default btn-sm', method: :post %>
+      <td><%= link_to 'Pass', auction_pass_instance_path(@instance), class: 'btn btn-primary btn-sm', method: :post %>
     </tr>
   </table>
 <% end %>

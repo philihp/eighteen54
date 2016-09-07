@@ -20,14 +20,14 @@
       <tr>
         <td><%= player.name %></td>
         <td>
-          <%= link_to [player.instance, player], class: 'btn btn-primary btn-sm' do %>
+          <%= link_to [player.instance, player], class: 'btn btn-default btn-sm' do %>
             <span class="glyphicon glyphicon-expand" aria-hidden="true"></span> Show
           <% end %>
           <% if @instance.setup? %>
             <%= link_to edit_instance_player_path(player.instance, player), class: 'btn btn-default btn-sm' do %>
               <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit
             <% end %>
-            <%= link_to [player.instance, player], method: :delete, class: 'btn btn-default btn-sm', data: { confirm: 'Are you sure?' } do %>
+            <%= link_to [player.instance, player], method: :delete, class: 'btn btn-danger btn-sm', data: { confirm: 'Are you sure?' } do %>
               <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
             <% end %>
           <% end %>
@@ -40,7 +40,7 @@
       <td></td>
       <td>
         <% if @instance.setup? %>
-          <%= link_to new_instance_player_path, class: 'btn btn-default btn-sm' do %>
+          <%= link_to new_instance_player_path, class: 'btn btn-primary btn-sm' do %>
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create
           <% end %>
         <% end %>
