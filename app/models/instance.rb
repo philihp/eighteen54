@@ -30,7 +30,7 @@ class Instance < ApplicationRecord
     setup: 0,
     auction: 1,
     auction_operating_round: 2,
-    share_round: 3,
+    stock_round: 3,
     operating_round_1: 4,
     operating_round_2: 5,
     operating_round_3: 6,
@@ -49,8 +49,8 @@ class Instance < ApplicationRecord
       self.becomes(InstanceInSetup)
     when :auction
       self.becomes(InstanceInAuction)
-    when :share_round
-      self.becomes(InstanceInShareRound)
+    when :stock_round
+      self.becomes(InstanceInStockRound)
     when :operating_round_1, :operating_round_2, :operating_round_3, :auction_operating_round
       self.becomes(InstanceInOperatingRound)
     end

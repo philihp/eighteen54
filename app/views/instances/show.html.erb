@@ -7,31 +7,36 @@
   </ul>
 <% end %>
 
-<div class="row col-md-12">
-  <b>Bank</b> <%= guilder(@instance.bank) %> |
-  <b>Phase</b> <%= @instance.phase %> |
-  <b>Round</b> <%= @instance.round.to_s.titleize %>
-  <% if @instance.active_player.present? %>
-    | <b>Active Player</b>
-      <%= link_to [@instance, @instance.active_player] do %>
-        <% @instance.active_player.name %>
-      <% end %>
-    with <%= guilder(@instance.active_player.wallet) %>
-  <% end %>
-  <% if @instance.priority.present? %>
-   | <b>Priority</b>
-     <%= link_to [@instance, @instance.priority] do %>
-       <% @instance.priority.name %>
-     <% end %>
-  <% end %>
-</div>
+<div class="container">
+  <div class="row col-md-12">
+    <b>Bank</b> <%= guilder(@instance.bank) %> |
+    <b>Phase</b> <%= @instance.phase %> |
+    <b>Round</b> <%= @instance.round.to_s.titleize %>
+    <% if @instance.active_player.present? %>
+      | <b>Active Player</b>
+        <%= link_to [@instance, @instance.active_player] do %>
+          <% @instance.active_player.name %>
+        <% end %>
+      with <%= guilder(@instance.active_player.wallet) %>
+    <% end %>
+    <% if @instance.priority.present? %>
+     | <b>Priority</b>
+       <%= link_to [@instance, @instance.priority] do %>
+         <% @instance.priority.name %>
+       <% end %>
+    <% end %>
+  </div>
 
-<div class="row col-md-12">
-  <%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
-  <%= link_to 'Bump Round', bump_round_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
-  <%= link_to 'Next Player', next_player_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
-</div>
+  <div class="row col-md-12">
+    <%= link_to 'Bump Phase', bump_phase_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
+    <%= link_to 'Bump Round', bump_round_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
+    <%= link_to 'Next Player', next_player_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
+  </div>
 
-<h1><%= @instance.name %></h1>
-
+  <div class="row col-md-12">
 <%= render 'show_auction', instance: @instance %>
+<%= render 'show_stock_round', instance: @instance %>
+  </div>
+</div>
+
+

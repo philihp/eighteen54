@@ -1,5 +1,15 @@
-
 <% if instance.auction? %>
+
+  <p>The active player (<%= instance.active_player.name %>) should take an action:</p>
+  <ol>
+    <li>Pass. If all players pass in a row, the game goes into a special auction-round operating round, where locals operate.</li>
+    <li>Bid on any company. Money will be tied up while it is the high bid.</li>
+    <li>Buy the top company. This triggers all companies down the line to be bought if there is a single bid, or they go into auction among all current bidders for it.</li>
+  </ol>
+  <p>
+    Additionally, the active player can retract any bids they've made that are not the current high bid for a company.
+  </p>
+
   <h2>Companies for Auction</h2>
   <table class="table">
     <tr>

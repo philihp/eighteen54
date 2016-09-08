@@ -47,8 +47,9 @@ class InstanceInAuction < Instance
   end
 
   def bump_round!
-    self.share_round!
+    self.stock_round!
     self.save
+    self.from_round.start_round!
   end
 
   def reduce_first_cost!
@@ -90,6 +91,21 @@ class InstanceInAuction < Instance
     end
 
     self.companies.reload
-    bump_round! unless unowned_companies.present?
+    unless unowned_companies.present?
+      create_majors!
+      bump_round!
+    end
   end
+
+  def create_majors!
+    self.companies << Company::KaiserinElisabethWestbahn.new
+    self.companies << Company::KaiserFranzJosephBahn.new
+    self.companies << Company::Sudbahn.new
+    self.companies << Company::KronprinzRudolfBahn.new
+    self.companies << Company::KarntnerBahn.new
+    self.companies << Company::SalzburgerBahn.new
+    self.companies << Company::NordtirolerStaatsbahn.new
+    self.companies << Company::VorarlbergerBahn.new
+  end
+
 end

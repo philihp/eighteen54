@@ -1,0 +1,30 @@
+<tr>
+  <td>
+    <%= link_to instance_company_path(instance,company) do %>
+      <%= company.name %>
+    <% end %>
+  </td>
+  <td>
+    <% if company.director.present? %>
+      <%= company.director.name %>
+    <% elsif company.bids.present? %>
+      <ul class="list-unstyled">
+        <% company.bids.each do |bid| %>
+          <li>
+            Bid of <%= guilder(bid.amount) %> by <%= bid.player.name %>
+            <% if !bid.is_high_bid? && bid.player == instance.active_player %>
+              <%= link_to 'Retract', instance_company_bid_path(instance, company, bid), method: :delete, class: 'btn btn-primary btn-xs' %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </td>
+  <td>
+    <% if company.income.present? %>
+      Income <%= guilder(company.income) %>
+    <% end %>
+  </td>
+  <td>
+  </td>
+</tr>
