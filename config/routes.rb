@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
       post 'auction_pass'
       post 'auction_buy'
+
+      post 'stock_pass'
     end
   end
 end

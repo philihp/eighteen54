@@ -97,6 +97,17 @@ class InstancesController < ApplicationController
     redirect_to @instance
   end
 
+  def stock_pass
+    unless @instance.from_round.instance_of? InstanceInStockRound
+      flash[:error] = "Can't pass in stock round unless the instance is currently in a stock round"
+      return redirect_to @instance
+    end
+    result_message = @instance.from_round.pass!
+    @instance.save
+    flash[:success] = result_message
+    redirect_to @instance
+  end
+
   def next_player
     @instance.next_player!
     @instance.save

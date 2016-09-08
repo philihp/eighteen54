@@ -2,7 +2,9 @@
 
   <p>Currently in a stock round. Active player can sell any of their shares, and then buy one share/certificate. They can also pass. Round ends when all players pass consecutively.</p>
 
-  <h2>Companies Available</h2>
+  <h3>Active Player's Stocks</h3>
+
+  <h3>Company Stock Available</h3>
 
   <table class="table">
     <tr>
@@ -18,7 +20,7 @@
       <td colspan="3"></td>
       <td>
         <% if instance.active_company.nil? %>
-          <%= link_to 'Pass', auction_pass_instance_path(instance), class: 'btn btn-primary btn-sm', method: :post %>
+          <%= link_to 'Pass', stock_pass_instance_path(instance), class: 'btn btn-primary btn-sm', method: :post %>
         <% end %>
       </td>
     </tr>
