@@ -16,6 +16,42 @@ module Company
 
     scope :unowned, -> { where(director: nil) }
 
+    # these are kinda weird with module/scope
+    #
+    # scope :mountain, -> do
+    #   where(type: [
+    #     Company::Ausserfernbahn.name,
+    #     Company::Murtalbahn.name,
+    #     Company::GrazKoflacherBahn.name,
+    #     Company::Arlbergbahn.name,
+    #     Company::Semmeringbahn.name,
+    #   ])
+    # end
+    #
+    # scope :local, -> do
+    #   where(type: [
+    #     Company::Mariazellerbahn.name,
+    #     Company::KernHoferbahn.name,
+    #     Company::YbbstalerBahn.name,
+    #     Company::Steyrtalbahn.name,
+    #     Company::Phyrnbahn.name,
+    #     Company::Salzkammergutbahn.name,
+    #   ])
+    # end
+    #
+    # scope :major, -> do
+    #   where(type: [
+    #     Company::KaiserinElisabethWestbahn.name,
+    #     Company::KaiserFranzJosephBahn.name,
+    #     Company::Sudbahn.name,
+    #     Company::KronprinzRudolfBahn.name,
+    #     Company::KarntnerBahn.name,
+    #     Company::SalzburgerBahn.name,
+    #     Company::NordtirolerStaatsbahn.name,
+    #     Company::VorarlbergerBahn.name,
+    #   ])
+    # end
+
     after_initialize :set_defaults, unless: :persisted?
 
     def name
