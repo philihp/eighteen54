@@ -6,6 +6,10 @@ module Company
       self.cost = 20
     end
 
+    def name
+      'Außerfernbahn'
+    end
+
     def income
       5
     end

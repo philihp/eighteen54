@@ -1,7 +1,18 @@
 class Player < ApplicationRecord
+
   belongs_to :instance
+
   has_many :bids
-  has_many :directorships, class_name: 'Company::Company', foreign_key: 'director_id'
+
+  has_many :directorships,
+           class_name: 'Company::Company',
+           foreign_key: 'director_id'
+
+  # A player can only have one optioned share, and if they do then it
+  # has to be the next share they buy.
+  belongs_to :optioned_share,
+             class_name: 'Certificate',
+             optional: true
 
   after_initialize :set_defaults, unless: :persisted?
 

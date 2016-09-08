@@ -11,6 +11,11 @@ class Instance < ApplicationRecord
            dependent: :destroy,
            autosave: true
 
+  has_many :certificates, -> { unowned },
+           validate: true,
+           dependent: :destroy,
+           autosave: true
+
   belongs_to :active_player,
              class_name: 'Player',
              optional: true
@@ -73,12 +78,6 @@ class Instance < ApplicationRecord
   def next_player
     next_turn_order = (self.active_player.turn_order + 1) % self.players.count
     self.players.where(turn_order: next_turn_order).first
-  end
-
-  def unowned_companies
-    self.companies.find_all do |company|
-      company.director == nil
-    end
   end
 
 end

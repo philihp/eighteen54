@@ -7,7 +7,7 @@ class InstanceInAuction < Instance
     self.save
     if self.passes < self.players.count
       "#{self.passes} of #{self.players.count} players have passed."
-    elsif unowned_companies.first.instance_of? Company::Ausserfernbahn
+    elsif self.companies.unowned.first.instance_of? Company::Ausserfernbahn
       reduce_first_cost!
       self.passes = 0
       "Everyone passed, but no one bought Ausserfernbahn, so its price has been reduced."
@@ -20,7 +20,7 @@ class InstanceInAuction < Instance
 
   # Buy the first private (assumes it has no bids)
   def buy!
-    company = unowned_companies.first
+    company = companies.unowned.first
     cost = company.cost
     player = self.active_player
 
@@ -70,7 +70,7 @@ class InstanceInAuction < Instance
 
   def next_auction!
     # Buy companies while they have 1 bid. Go into auction if 2+ bids.
-    unowned_companies.each do |c|
+    self.companies.unowned.each do |c|
       if c.bids.count == 1
         # The player with the lone bid buys the property uncontested
         c.bids.first.execute!
@@ -91,7 +91,7 @@ class InstanceInAuction < Instance
     end
 
     self.companies.reload
-    unless unowned_companies.present?
+    unless self.companies.unowned.present?
       create_majors!
       bump_round!
     end
