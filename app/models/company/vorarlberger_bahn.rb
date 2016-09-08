@@ -17,5 +17,9 @@ module Company
       'Bregenz'
     end
 
+    def charter_type
+      :major
+    end
+
   end
 end

@@ -14,5 +14,9 @@ module Company
       15
     end
 
+    def charter_type
+      :mountain
+    end
+
   end
 end

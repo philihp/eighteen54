@@ -10,5 +10,9 @@ module Company
       'Ybbstaler Bahn'
     end
 
+    def charter_type
+      :local
+    end
+
   end
 end

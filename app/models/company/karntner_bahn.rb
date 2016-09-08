@@ -17,5 +17,9 @@ module Company
       'Klagenfurt'
     end
 
+    def charter_type
+      :major
+    end
+
   end
 end

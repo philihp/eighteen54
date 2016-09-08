@@ -10,5 +10,9 @@ module Company
       10
     end
 
+    def charter_type
+      :mountain
+    end
+
   end
 end
