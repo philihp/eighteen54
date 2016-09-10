@@ -19,7 +19,7 @@
       <th></th>
     </tr>
     <% instance.companies.each do |company| %>
-      <%= render 'company_auction', company: company, instance: instance %>
+      <%= render 'company_auction', company: company, instance: instance, player: instance.active_player %>
     <% end %>
     <tr>
       <td colspan="3"></td>

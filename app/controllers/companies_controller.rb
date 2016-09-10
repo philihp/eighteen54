@@ -2,6 +2,7 @@ class CompaniesController < ApplicationController
 
   before_action :set_company
   before_action :set_instance
+  before_action :set_player
 
   def index
   end
@@ -12,7 +13,6 @@ class CompaniesController < ApplicationController
   def bid
     amount = params[:amount].to_i
     bid = Bid.new(amount: amount)
-    @player = @instance.active_player
 
     unless @company.minimum_bid <= bid.amount
       flash[:error] = "Must bid a minimum of #{@company.minimum_bid}"
@@ -29,13 +29,35 @@ class CompaniesController < ApplicationController
     bid.player = @player
     @player.wallet -= bid.amount
 
-    if @player.save && bid.save
+    if bid.save && @player.save
       @instance.from_round.next_player!
       flash[:success] = "Bid #{bid.amount} G. on #{bid.company.name} by #{bid.player.name}"
-      redirect_to @instance
     else
-      flash[:error] = "Unable to create bid"
+      flash[:error] = 'Unable to create bid.'
     end
+    redirect_to @instance
+  end
+
+  def set_par_and_buy
+    par_value = params[:par_value].to_i
+    director_certificate = @company.certificates.where(percent: 40).first
+    if @company.cost.present?
+      flash[:error] = "Can't set par value. #{@company.name} already one of #{@company.cost}."
+    elsif director_certificate.player.present?
+      flash[:error] = "Can't buy company share, #{director_certificate.player.name} already holds the director certificate."
+    else
+      @company.cost = par_value
+      @player.wallet -= par_value * director_certificate.percent / 10
+      @player.save
+      director_certificate.player = @player
+      if  director_certificate.save && @company.save && @player.save
+        @instance.from_round.next_player!
+        flash[:success] = "Par value set to #{par_value} and director certificate awarded to #{@player.name}."
+      else
+        flash[:error] = 'Unable to set par value and buy director certificate.'
+      end
+    end
+    redirect_to @instance
   end
 
 private
@@ -46,6 +68,10 @@ private
 
   def set_instance
     @instance = Instance.find(params[:instance_id])
+  end
+
+  def set_player
+    @player = @instance.active_player
   end
 
   def retract_any_old_bid!

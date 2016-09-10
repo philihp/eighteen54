@@ -18,7 +18,7 @@
   </td>
   <td>
     <% if company.charter_type == :major && player.can_set_par?(company) %>
-      <%= bootstrap_form_tag url: bid_instance_company_path(instance, company), layout: :inline  do |f| %>
+      <%= bootstrap_form_tag url: set_par_and_buy_instance_company_path(instance, company), layout: :inline  do |f| %>
         <select class="form-control input-sm" name="par_value">
           <%= par_set_option(player, 67) %>
           <%= par_set_option(player, 72) %>

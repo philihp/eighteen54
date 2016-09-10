@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resources :bids, only: [:destroy]
       member do
         post 'bid'
+        post 'set_par_and_buy'
       end
     end
     member do
