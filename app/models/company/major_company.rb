@@ -19,10 +19,10 @@ module Company
     end
 
     def create_certificates!
-      self.certificates << Certificate.build(instance: instance, company: self, percent: 40)
-      self.certificates << Certificate.build(instance: instance, company: self, percent: 20)
-      self.certificates << Certificate.build(instance: instance, company: self, percent: 20)
-      self.certificates << Certificate.build(instance: instance, company: self, percent: 20)
+      self.certificates << Certificate.create(instance: instance, company: self, percent: 40)
+      self.certificates << Certificate.create(instance: instance, company: self, percent: 20)
+      self.certificates << Certificate.create(instance: instance, company: self, percent: 20)
+      self.certificates << Certificate.create(instance: instance, company: self, percent: 20)
     end
 
     def par_value

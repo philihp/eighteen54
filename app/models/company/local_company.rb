@@ -17,7 +17,7 @@ module Company
     end
 
     def create_certificates!
-      self.certificates << Certificate.build(instance: instance, company: self, percent: 100)
+      self.certificates << Certificate.create(instance: instance, company: self, percent: 100)
     end
 
   end

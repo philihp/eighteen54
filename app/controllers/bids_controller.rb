@@ -11,7 +11,6 @@ class BidsController < ApplicationController
     end
     player = @bid.player
     company = @bid.company
-    amount = @bid.amount
     player.wallet += @bid.amount
     if player.save && @bid.destroy
       if company.being_auctioned?

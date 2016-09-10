@@ -9,6 +9,9 @@ class Bid < ApplicationRecord
   def execute!
     self.company.director = self.player
     self.company.save
+    certificate = self.company.certificates.first
+    certificate.player = self.player
+    certificate.save
     self.destroy
   end
 

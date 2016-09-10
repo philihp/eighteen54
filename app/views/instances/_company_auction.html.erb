@@ -24,6 +24,8 @@
     <% if company.charter_type == :mountain %>
       <%= "Income #{guilder(company.income)}" %><br />
       <%= company.perk %>
+    <% elsif company.charter_type == :local %>
+      <i>Local</i>
     <% end %>
   </td>
   <td>

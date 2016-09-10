@@ -21,6 +21,7 @@ class InstanceInAuction < Instance
   # Buy the first private (assumes it has no bids)
   def buy!
     company = companies.unowned.first
+    certificate = company.certificates.first
     cost = company.cost
     player = self.active_player
 
@@ -33,6 +34,9 @@ class InstanceInAuction < Instance
 
     company.director = player
     company.save
+
+    certificate.player = player
+    certificate.save
 
     next_player!
 
@@ -98,14 +102,28 @@ class InstanceInAuction < Instance
   end
 
   def create_majors!
-    self.companies << Company::KaiserinElisabethWestbahn.new
-    self.companies << Company::KaiserFranzJosephBahn.new
-    self.companies << Company::Sudbahn.new
-    self.companies << Company::KronprinzRudolfBahn.new
-    self.companies << Company::KarntnerBahn.new
-    self.companies << Company::SalzburgerBahn.new
-    self.companies << Company::NordtirolerStaatsbahn.new
-    self.companies << Company::VorarlbergerBahn.new
+    self.companies << Company::KaiserinElisabethWestbahn.create(instance: self)
+    self.companies << Company::KaiserFranzJosephBahn.create(instance: self)
+    self.companies << sb = Company::Sudbahn.create(instance: self)
+    self.companies << Company::KronprinzRudolfBahn.create(instance: self)
+    self.companies << Company::KarntnerBahn.create(instance: self)
+    self.companies << Company::SalzburgerBahn.create(instance: self)
+    self.companies << Company::NordtirolerStaatsbahn.create(instance: self)
+    self.companies << vb = Company::VorarlbergerBahn.create(instance: self)
+
+    semmeringbahn = Company::Company.where(instance: self, type: Company::Semmeringbahn.name).first
+    semmeringbahn.tapped = true
+    semmeringbahn.save
+    sbcertificate = sb.certificates.second
+    sbcertificate.player = semmeringbahn.director
+    sbcertificate.save
+
+    arlbergbahn = Company::Company.where(instance: self, type: Company::Arlbergbahn.name).first
+    arlbergbahn.tapped = true
+    arlbergbahn.save
+    vbcertificate = vb.certificates.second
+    vbcertificate.player = arlbergbahn.director
+    vbcertificate.save
   end
 
 end

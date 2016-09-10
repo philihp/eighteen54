@@ -25,4 +25,13 @@ class Player < ApplicationRecord
     company.minimum_bid <= existing_bid + self.wallet
   end
 
+  def can_set_par?(company)
+    return false unless company.director.nil?
+
+
+    # PAR_VALUES = [67,72,77,82,87,93]
+    return false if self.wallet <= 67 * 4
+    return true
+  end
+
 end
