@@ -1,5 +1,5 @@
 module Company
-  class SalzburgerBahn < ::Company::Company
+  class SalzburgerBahn < Major
 
     def set_defaults
       super
@@ -7,6 +7,14 @@ module Company
 
     def name
       'Salzburger Bahn'
+    end
+
+    def abbr
+      'SB'
+    end
+
+    def color
+      'crimson'
     end
 
     def stations

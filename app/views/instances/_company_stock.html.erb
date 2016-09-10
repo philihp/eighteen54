@@ -10,8 +10,9 @@
     <% end %>
   </td>
   <td>
-    <% if company.income.present? %>
-      Income <%= guilder(company.income) %>
+    <% if company.charter_type == :mountain %>
+      <%= "Income #{guilder(company.income)}" %><br />
+      <%= company.perk %>
     <% end %>
   </td>
   <td>

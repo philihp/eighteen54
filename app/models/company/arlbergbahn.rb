@@ -7,7 +7,11 @@ module Company
     end
 
     def income
-      20
+      2
+    end
+
+    def perk
+      'Receives a 20% share in VB, Closes when VB first runs'
     end
 
     def charter_type

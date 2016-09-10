@@ -10,6 +10,10 @@ module Company
       'Graz-Koflacher Bahn'
     end
 
+    def perk
+      'Routes through Graz earn 10 G. more'
+    end
+
     def income
       15
     end

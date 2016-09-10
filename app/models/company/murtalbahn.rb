@@ -10,6 +10,10 @@ module Company
       10
     end
 
+    def perk
+      'Building one tunnel is 40 G. cheaper'
+    end
+
     def charter_type
       :mountain
     end

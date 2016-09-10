@@ -1,5 +1,5 @@
 module Company
-  class KaiserFranzJosephBahn < ::Company::Company
+  class KaiserFranzJosephBahn < MajorCompany
 
     def set_defaults
       super
@@ -7,6 +7,14 @@ module Company
 
     def name
       'Kaiser Franz Joseph-Bahn'
+    end
+
+    def abbr
+      'FJ'
+    end
+
+    def color
+      'tan'
     end
 
     def stations

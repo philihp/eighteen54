@@ -1,5 +1,5 @@
 module Company
-  class NordtirolerStaatsbahn < ::Company::Company
+  class NordtirolerStaatsbahn < MajorCompany
 
     def set_defaults
       super
@@ -7,6 +7,14 @@ module Company
 
     def name
       'Nordtiroler Staatsbahn'
+    end
+
+    def abbr
+      'NT'
+    end
+
+    def color
+      'paleturquoise'
     end
 
     def stations

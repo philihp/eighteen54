@@ -1,5 +1,5 @@
 module Company
-  class KaiserinElisabethWestbahn < ::Company::Company
+  class KaiserinElisabethWestbahn < MajorCompany
 
     def set_defaults
       super
@@ -7,6 +7,14 @@ module Company
 
     def name
       'Kaiserin Elisabeth-Westbahn'
+    end
+
+    def abbr
+      'KE'
+    end
+
+    def color
+      'pink'
     end
 
     def stations

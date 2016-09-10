@@ -10,6 +10,10 @@ module Company
       25
     end
 
+    def perk
+      'Receives a 20% share in SD, Closes when SD first runs'
+    end
+
     def charter_type
       :mountain
     end

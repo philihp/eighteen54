@@ -1,5 +1,5 @@
 module Company
-  class Sudbahn < ::Company::Company
+  class Sudbahn < MajorCompany
 
     def set_defaults
       super
@@ -7,6 +7,14 @@ module Company
 
     def name
       'Südbahn'
+    end
+
+    def abbr
+      'SD'
+    end
+
+    def color
+      'darkorange'
     end
 
     def stations

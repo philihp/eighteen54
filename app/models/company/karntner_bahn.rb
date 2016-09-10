@@ -1,5 +1,5 @@
 module Company
-  class KarntnerBahn < ::Company::Company
+  class KarntnerBahn < MajorCompany
 
     def set_defaults
       super
@@ -7,6 +7,14 @@ module Company
 
     def name
       'Kärntner Bahn'
+    end
+
+    def abbr
+      'KT'
+    end
+
+    def color
+      'gainsboro'
     end
 
     def stations
