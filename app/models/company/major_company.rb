@@ -1,5 +1,7 @@
 module Company
-  class MajorCompany < Company
+  class MajorCompany < ::Company::Company
+
+    PAR_VALUES = [67,72,77,82,87,93]
 
     # scope :major, -> do
     #   where(type: [

@@ -1,5 +1,5 @@
 module Company
-  class LocalCompany < Company
+  class LocalCompany < ::Company::Company
 
     # scope :local, -> do
     #   where(type: [

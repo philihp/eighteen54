@@ -1,5 +1,5 @@
 module Company
-  class MountainCompany < Company
+  class MountainCompany < ::Company::Company
 
     # scope :mountain, -> do
     #   where(type: [
