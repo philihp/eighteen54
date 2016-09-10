@@ -1,5 +1,5 @@
 module Company
-  class Semmeringbahn < ::Company::Company
+  class Semmeringbahn < MountainCompany
 
     def set_defaults
       super
@@ -13,10 +13,5 @@ module Company
     def perk
       'Receives a 20% share in SD, Closes when SD first runs'
     end
-
-    def charter_type
-      :mountain
-    end
-
   end
 end

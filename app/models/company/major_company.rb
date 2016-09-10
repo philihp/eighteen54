@@ -14,15 +14,20 @@ module Company
     #   ])
     # end
 
-    after_initialize :set_defaults, unless: :persisted?
-
-    def name
-      self.class.name.demodulize
+    def charter_type
+      :major
     end
 
-    def set_defaults
+    def create_certificates!
+      self.certificates << Certificate.build(instance: instance, company: self, percent: 40)
+      self.certificates << Certificate.build(instance: instance, company: self, percent: 20)
+      self.certificates << Certificate.build(instance: instance, company: self, percent: 20)
+      self.certificates << Certificate.build(instance: instance, company: self, percent: 20)
+    end
+
+    def par_value
       # In the context of a Major, `cost` is the par value.
-      self.cost ||= nil
+      self.cost
     end
 
   end

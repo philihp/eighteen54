@@ -1,5 +1,5 @@
 module Company
-  class KernhoferBahn < ::Company::Company
+  class KernhoferBahn < LocalCompany
 
     def name
       'Kernhofer Bahn'
@@ -8,10 +8,6 @@ module Company
     def set_defaults
       super
       self.cost = 150
-    end
-
-    def charter_type
-      :local
     end
 
   end

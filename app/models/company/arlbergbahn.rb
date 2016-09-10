@@ -1,5 +1,5 @@
 module Company
-  class Arlbergbahn < ::Company::Company
+  class Arlbergbahn < MountainCompany
 
     def set_defaults
       super
@@ -12,10 +12,6 @@ module Company
 
     def perk
       'Receives a 20% share in VB, Closes when VB first runs'
-    end
-
-    def charter_type
-      :mountain
     end
 
   end

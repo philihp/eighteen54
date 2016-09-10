@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       post 'auction_buy'
 
       post 'stock_pass'
+      post 'create_stub'
     end
   end
 end

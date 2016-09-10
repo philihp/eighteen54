@@ -1,5 +1,5 @@
 module Company
-  class YbbstalerBahn < ::Company::Company
+  class YbbstalerBahn < LocalCompany
 
     def set_defaults
       super
@@ -8,10 +8,6 @@ module Company
 
     def name
       'Ybbstaler Bahn'
-    end
-
-    def charter_type
-      :local
     end
 
   end

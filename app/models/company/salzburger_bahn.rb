@@ -1,5 +1,5 @@
 module Company
-  class SalzburgerBahn < Major
+  class SalzburgerBahn < MajorCompany
 
     def set_defaults
       super
@@ -23,10 +23,6 @@ module Company
 
     def home
       'Salzburg'
-    end
-
-    def charter_type
-      :major
     end
 
   end

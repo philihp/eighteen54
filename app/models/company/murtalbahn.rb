@@ -1,5 +1,5 @@
 module Company
-  class Murtalbahn < ::Company::Company
+  class Murtalbahn < MountainCompany
 
     def set_defaults
       super
@@ -12,10 +12,6 @@ module Company
 
     def perk
       'Building one tunnel is 40 G. cheaper'
-    end
-
-    def charter_type
-      :mountain
     end
 
   end

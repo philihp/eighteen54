@@ -1,13 +1,9 @@
 module Company
-  class Mariazellerbahn < ::Company::Company
+  class Mariazellerbahn < LocalCompany
 
     def set_defaults
       super
       self.cost = 150
-    end
-
-    def charter_type
-      :local
     end
 
   end

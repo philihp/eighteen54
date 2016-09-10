@@ -25,9 +25,5 @@ module Company
       'Innsbruck'
     end
 
-    def charter_type
-      :major
-    end
-
   end
 end

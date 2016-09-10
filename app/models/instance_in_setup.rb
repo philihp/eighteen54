@@ -46,19 +46,19 @@ private
 
   def create_privates!
     # Mountains
-    self.companies << Company::Ausserfernbahn.new
-    self.companies << Company::Murtalbahn.new
-    self.companies << Company::GrazKoflacherBahn.new
+    self.companies << Company::Ausserfernbahn.create(instance: self)
+    self.companies << Company::Murtalbahn.create(instance: self)
+    self.companies << Company::GrazKoflacherBahn.create(instance: self)
     # Locals 1-6
-    self.companies << Company::Mariazellerbahn.new
-    self.companies << Company::KernhoferBahn.new
-    self.companies << Company::YbbstalerBahn.new
-    self.companies << Company::Steyrtalbahn.new
-    self.companies << Company::Phyrnbahn.new
-    self.companies << Company::Salzkammergutbahn.new
+    self.companies << Company::Mariazellerbahn.create(instance: self)
+    self.companies << Company::KernhoferBahn.create(instance: self)
+    self.companies << Company::YbbstalerBahn.create(instance: self)
+    self.companies << Company::Steyrtalbahn.create(instance: self)
+    self.companies << Company::Phyrnbahn.create(instance: self)
+    self.companies << Company::Salzkammergutbahn.create(instance: self)
     # Mountains
-    self.companies << Company::Arlbergbahn.new
-    self.companies << Company::Semmeringbahn.new
+    self.companies << Company::Arlbergbahn.create(instance: self)
+    self.companies << Company::Semmeringbahn.create(instance: self)
   end
 
 end

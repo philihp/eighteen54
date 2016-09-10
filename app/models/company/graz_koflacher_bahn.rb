@@ -1,5 +1,5 @@
 module Company
-  class GrazKoflacherBahn < ::Company::Company
+  class GrazKoflacherBahn < MountainCompany
 
     def set_defaults
       super

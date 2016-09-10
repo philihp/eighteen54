@@ -1,5 +1,5 @@
 module Company
-  class Ausserfernbahn < ::Company::Company
+  class Ausserfernbahn < MountainCompany
 
     def set_defaults
       super
@@ -16,10 +16,6 @@ module Company
 
     def income
       5
-    end
-
-    def charter_type
-      :mountain
     end
 
   end

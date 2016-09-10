@@ -1,13 +1,9 @@
 module Company
-  class Phyrnbahn < ::Company::Company
+  class Phyrnbahn < LocalCompany
 
     def set_defaults
       super
       self.cost = 150
-    end
-
-    def charter_type
-      :local
     end
 
   end

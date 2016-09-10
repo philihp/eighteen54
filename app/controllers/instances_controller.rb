@@ -1,5 +1,5 @@
 class InstancesController < ApplicationController
-  before_action :set_instance, except: [:index, :new, :create, :show ]
+  before_action :set_instance, except: [:index, :new, :create, :show, :create_stub ]
 
   # GET /instances
   # GET /instances.json
@@ -112,6 +112,18 @@ class InstancesController < ApplicationController
     @instance.next_player!
     @instance.save
     flash[:success] = "Active player passed to the next player."
+    redirect_to @instance
+  end
+
+  def create_stub
+    @instance = Instance.create({name: "Instance #{Time.new}"})
+    Player.create({name: 'Alice', instance: @instance})
+    Player.create({name: 'Betty', instance: @instance})
+    Player.create({name: 'Carol', instance: @instance})
+    Player.create({name: 'Debby', instance: @instance})
+    @instance.from_round.bump_round!
+    @instance.save
+    flash[:success] = "Created stub"
     redirect_to @instance
   end
 
