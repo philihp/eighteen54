@@ -14,6 +14,11 @@ Rails.application.routes.draw do
         post 'execute_option'
       end
     end
+    resources :certificates do
+      member do
+        post 'sell'
+      end
+    end
     member do
       post 'bump_phase'  # debug
       post 'bump_round'  # debug

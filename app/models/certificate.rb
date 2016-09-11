@@ -28,6 +28,15 @@ class Certificate < ApplicationRecord
     self.player.try(:optioned_share) == self
   end
 
+  def sellable?
+    self.company.charter_type == :major &&
+      [nil, self].include?(self.player.optioned_share)
+  end
+
+  def value
+
+  end
+
   def effective_percent
     if optioned?
       self.percent / 2

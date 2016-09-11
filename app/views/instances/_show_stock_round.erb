@@ -7,6 +7,12 @@
     <% instance.active_player.certificates.each do |certificate| %>
       <li>
         <%= certificate.percent %>% in <%= certificate.company.name %>
+        <% if certificate.optioned? %>
+          (option)
+        <% end %>
+        <% if certificate.sellable? %>
+          <%= link_to 'Sell', sell_instance_certificate_path(instance, certificate), class: 'btn btn-primary btn-xs', method: :post %>
+        <% end %>
       </li>
     <% end %>
   </ul>
