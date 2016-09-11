@@ -40,6 +40,14 @@ class Certificate < ApplicationRecord
       self.instance.stock_rounds > 1
   end
 
+  def counts_toward_limit?
+    x = self.company.value_x
+    y = self.company.value_y
+    !(y == 0 ||
+      y == 1 && [0,1,4,5].include?(x) ||
+      y == 2 && [0,5,6].include?(x))
+  end
+
   def sell_value
     self.company.value
   end

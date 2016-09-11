@@ -3,6 +3,17 @@ module Company
 
     PAR_VALUES = [67,72,77,82,87,93].sort
 
+    MARKET = [
+      [nil, 54, 57, 60, 63 ],
+      [ 56, 59, 62, 65, 68, 71 ],
+      [ 61, 64, 67, 70, 73, 76, 79 ],
+      [ 66, 69, 72, 75, 78, 81, 85, 89 ],
+      [ 71, 74, 77, 80, 83, 87, 91, 95,100 ],
+      [ 76, 79, 82, 85, 89, 93, 97,102,108,115,123 ],
+      [ 81, 84, 87, 91, 95, 99,104,110,117,125,134,143,153,165,180,200 ],
+      [ 86, 89, 93, 97,101,106,112,119,127,136,146,158,170,185,210,230,250,275,300 ],
+    ]
+
     # scope :major, -> do
     #   where(type: [
     #     Company::KaiserinElisabethWestbahn.name,
@@ -25,6 +36,61 @@ module Company
       self.certificates << Certificate.create(instance: instance, company: self, percent: 20)
       self.certificates << Certificate.create(instance: instance, company: self, percent: 20)
       self.certificates << Certificate.create(instance: instance, company: self, percent: 20)
+    end
+
+    def value(x=self.value_x, y=self.value_y)
+      return nil if y.nil? || y < 0 ||
+                    x.nil? || x < 0 ||
+                    MARKET[y].nil?
+      return MARKET[y][x]
+    end
+
+    def update_value_from_buying_train_from_another_company!
+      if value(self.value_x-1, self.value_y+1).present?
+        self.value_x -= 1
+        self.value_y += 1
+      end
+    end
+
+    def update_value_from_selling_train_to_another_company!
+      if value(self.value_x+1, self.value_y-1).present?
+        self.value_x += 1
+        self.value_y -= 1
+      end
+    end
+
+    def update_value_from_not_paying_dividend!
+      return if [self.value_x,self.value_y] == [1,0] # bottom left 54
+      return if [self.value_x,self.value_y] == [0,1] # bottom right 56
+      if self.value_x > 0
+        self.value_x -= 1
+      elsif self.value_y > 0
+        self.value_x = 0
+        self.value_y -= 1
+      end
+    end
+
+    def update_value_from_paying_dividend!
+      if value(self.value_x+1, self.value_y).present?
+        self.value_x += 1
+      elsif value(self.value_x+1, self.value_y+1).present?
+        self.value_x += 1
+        self.value_y += 1
+      end
+      # TODO split! if should_split?
+    end
+
+    def update_value_from_all_shares_sold!
+      self.value_y += 1 if value(self.value_x, self.value_y+1).present?
+      # TODO split! if should_split?
+    end
+
+    def update_value_from_selling_share!
+      self.value_y -= 1 if value(self.value_x, self.value_y-1).present?
+    end
+
+    def should_split?
+      self.value_y + self.value_x > 9
     end
 
     def par_value
