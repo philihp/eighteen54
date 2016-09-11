@@ -39,4 +39,13 @@ class Player < ApplicationRecord
     share.try(:cost).present? && self.wallet > share.cost
   end
 
+  def can_option_share?(company)
+    share = company.first_unowned_share
+    share.try(:cost).present? && self.wallet > share.cost / 2
+  end
+
+  def must_buy_option?(company)
+    self.optioned_share.try(:company) == company
+  end
+
 end

@@ -11,7 +11,8 @@
   <div class="row col-md-12">
     <b>Bank</b> <%= guilder(@instance.bank) %> |
     <b>Phase</b> <%= @instance.phase %> |
-    <b>Round</b> <%= @instance.round.to_s.titleize %>
+    <b>Round</b> <%= @instance.round.to_s.titleize %> |
+    <b>Passes</b> <%= @instance.passes %>
     <% if @instance.active_player.present? %>
       | <b>Active Player</b>
         <%= link_to [@instance, @instance.active_player] do %>

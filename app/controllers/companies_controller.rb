@@ -88,9 +88,26 @@ class CompaniesController < ApplicationController
       @instance.passes = 0
       if certificate.save && @player.save && @instance.save
         end_of_round_upkeep!
-        flash[:success] = "#{@player.name} purchased an option of #{certificate.company.name} for #{certificate.cost}."
+        flash[:success] = "#{@player.name} purchased an option of #{certificate.company.name} for #{certificate.cost / 2}."
       else
         flash[:error] = 'Unable to purchase option.'
+      end
+    end
+    redirect_to @instance
+  end
+
+  def execute_option
+    certificate = @player.optioned_share
+    if @player.wallet < certificate.cost / 2
+      flash[:error] = "#{@player.name} needs #{certificate.cost/2} G. to execute an option, but only has #{@player.wallet} G."
+    else
+      certificate.execute_option!
+      @instance.passes = 0
+      if certificate.save && @player.save && @instance.save
+        end_of_round_upkeep!
+        flash[:success] = "#{@player.name} executed an option of #{certificate.company.name} for #{certificate.cost / 2}."
+      else
+        flash[:error] = 'Unable to execute option.'
       end
     end
     redirect_to @instance

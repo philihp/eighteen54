@@ -10,6 +10,8 @@ Rails.application.routes.draw do
         post 'bid'
         post 'set_par_and_buy'
         post 'buy'
+        post 'option'
+        post 'execute_option'
       end
     end
     member do

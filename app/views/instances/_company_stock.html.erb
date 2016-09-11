@@ -13,7 +13,12 @@
     <ul class="list-unstyled">
       <% company.certificates.each do |certificate| %>
         <% if certificate.player.present? %>
-            <li><%= certificate.percent %>% <%= certificate.player.try(:name) %></li>
+            <li>
+              <%= certificate.percent %>% <%= certificate.player.try(:name) %>
+              <% if certificate.optioned? %>
+                (option)
+              <% end %>
+            </li>
         <% end %>
       <% end %>
     </ul>
@@ -29,7 +34,22 @@
           </select>
           <%= f.submit('Set Par & Buy', class: 'btn btn-primary btn-sm') %>
         <% end %>
+      <% elsif player.must_buy_option?(company) %>
+        <form method="post" class="form-inline">
+          <select class="form-control input-sm" disabled="true">
+            <option><%= company.cost %></option>
+          </select>
+          <%= link_to 'Execute Option', execute_option_instance_company_path(instance,company), class: 'btn btn-primary btn-sm', method: :post %>
+        </form>
       <% elsif player.can_buy_share?(company) %>
+        <form method="post" class="form-inline">
+          <select class="form-control input-sm" disabled="true">
+            <option><%= company.cost %></option>
+          </select>
+          <%= link_to 'Buy', buy_instance_company_path(instance, company), class: 'btn btn-primary btn-sm', method: :post %>
+          <%= link_to 'Option', option_instance_company_path(instance, company), class: 'btn btn-primary btn-sm', method: :post %>
+        </form>
+      <% elsif player.can_option_share?(company) %>
         <%= bootstrap_form_tag url: buy_instance_company_path(instance, company), layout: :inline  do |f| %>
           <select class="form-control input-sm" name="par_value" disabled="true">
             <option><%= company.cost %></option>

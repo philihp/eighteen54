@@ -50,9 +50,22 @@ class Certificate < ApplicationRecord
   end
 
   def option!(player)
+    money = cost / 2
     player.optioned_share = self
-    buy!(player)
+    player.wallet -= money
+    self.instance.bank += money
+    self.player = player
+    self.instance.save
     player.save
+  end
+
+  def execute_option!
+    money = cost / 2
+    self.player.optioned_share = nil
+    self.player.wallet -= money
+    self.player.save
+    self.instance.bank += money
+    self.instance.save
   end
 
 end
