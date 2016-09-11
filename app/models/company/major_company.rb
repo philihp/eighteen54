@@ -1,7 +1,7 @@
 module Company
   class MajorCompany < ::Company::Company
 
-    PAR_VALUES = [67,72,77,82,87,93]
+    PAR_VALUES = [67,72,77,82,87,93].sort
 
     # scope :major, -> do
     #   where(type: [
@@ -30,6 +30,18 @@ module Company
     def par_value
       # In the context of a Major, `cost` is the par value.
       self.cost
+    end
+
+    def floats?
+      percent_owned >= 50
+    end
+
+    def percent_owned
+      certificates.owned.reduce(0) { |sum, c| sum + c.effective_percent }
+    end
+
+    def first_unowned_share
+      certificates.unowned.first
     end
 
   end

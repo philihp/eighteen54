@@ -10,21 +10,27 @@
     <% end %>
   </td>
   <td>
-    <ul>
-    <% company.certificates.each do |certificate| %>
-      <li>[<%= certificate.percent %>%: <%= certificate.player.try(:name) %>]</li>
-    <% end %>
-    </li>
+    <ul class="list-unstyled">
+      <% company.certificates.each do |certificate| %>
+        <% if certificate.player.present? %>
+            <li><%= certificate.percent %>% <%= certificate.player.try(:name) %></li>
+        <% end %>
+      <% end %>
+    </ul>
   </td>
   <td>
-    <% if company.charter_type == :major && player.can_set_par?(company) %>
-      <%= bootstrap_form_tag url: set_par_and_buy_instance_company_path(instance, company), layout: :inline  do |f| %>
-        <select class="form-control input-sm" name="par_value">
-          <% Company::MajorCompany::PAR_VALUES.each do |par| %>
-            <%= par_set_option(player, par) %>
-          <% end %>
-        </select>
-        <%= f.submit('Set Par & Buy', class: 'btn btn-primary btn-sm') %>
+    <% if company.charter_type == :major %>
+      <% if player.can_set_par?(company) %>
+        <%= bootstrap_form_tag url: set_par_and_buy_instance_company_path(instance, company), layout: :inline  do |f| %>
+          <select class="form-control input-sm" name="par_value">
+            <% Company::MajorCompany::PAR_VALUES.each do |par| %>
+              <%= par_set_option(player, par) %>
+            <% end %>
+          </select>
+          <%= f.submit('Set Par & Buy', class: 'btn btn-primary btn-sm') %>
+        <% end %>
+      <% elsif player.can_buy_share?(company) %>
+        <%= link_to 'Buy Share', buy_instance_company_path(instance, company), class: 'btn btn-primary btn-sm', method: :post %>
       <% end %>
     <% end %>
   </td>

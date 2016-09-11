@@ -11,6 +11,8 @@ class Bid < ApplicationRecord
     self.company.save
     certificate = self.company.certificates.first
     certificate.player = self.player
+    self.player.instance.bank += self.amount
+    self.player.instance.save
     certificate.save
     self.destroy
   end

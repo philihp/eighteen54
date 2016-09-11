@@ -47,9 +47,12 @@ class CompaniesController < ApplicationController
       flash[:error] = "Can't buy company share, #{director_certificate.player.name} already holds the director certificate."
     else
       @company.cost = par_value
-      @player.wallet -= par_value * director_certificate.percent / 10
+      money = par_value * director_certificate.percent / 10
+      @player.wallet -= money
+      @instance.bank += money
       @player.save
       director_certificate.player = @player
+      @company.director = @player
       if  director_certificate.save && @company.save && @player.save
         @instance.from_round.next_player!
         flash[:success] = "Par value set to #{par_value} and director certificate awarded to #{@player.name}."
@@ -57,6 +60,25 @@ class CompaniesController < ApplicationController
         flash[:error] = 'Unable to set par value and buy director certificate.'
       end
     end
+    redirect_to @instance
+  end
+
+  def buy
+    flash[:notice] = "Bought Share"
+    certificate = @company.first_unowned_share
+    if @player.wallet < certificate.cost
+      flash[:error] = "#{@player.name} only has #{@player.wallet} G., while the share costs #{certificate.cost}."
+    else
+      certificate.buy!(@player)
+      @instance.passes = 0
+      if certificate.save && @player.save && @instance.save
+        @instance.from_round.next_player!
+        flash[:success] = "#{@player.name} purchased a share of #{certificate.company.name} for #{certificate.cost}."
+      else
+        flash[:error] = 'Unable to purchase share.'
+      end
+    end
+
     redirect_to @instance
   end
 

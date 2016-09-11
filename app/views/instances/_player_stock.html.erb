@@ -1,0 +1,8 @@
+
+<ul>
+  <% player.certificates.each do |certificate| %>
+    <li>
+      <%= certificate.percent %>% in <%= certificate.company.name %>
+    </li>
+  <% end %>
+</ul>

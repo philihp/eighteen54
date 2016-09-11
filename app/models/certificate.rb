@@ -22,5 +22,30 @@ class Certificate < ApplicationRecord
           inverse_of: :optioned_share
 
   scope :unowned, -> { where(player: nil) }
+  scope :owned, -> { where.not(player: nil) }
+
+  def optioned?
+    self.player.try(:optioned_share) == self
+  end
+
+  def effective_percent
+    if optioned?
+      self.percent / 2
+    else
+      self.percent
+    end
+  end
+
+  def cost
+    return false if self.company.cost.nil?
+    self.company.cost * self.percent / 10
+  end
+
+  def buy!(player)
+    money = cost
+    player.wallet -= money
+    instance.bank += money
+    self.player = player
+  end
 
 end

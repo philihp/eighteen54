@@ -8,6 +8,9 @@ class Player < ApplicationRecord
            class_name: 'Company::Company',
            foreign_key: 'director_id'
 
+  has_many :certificates,
+           inverse_of: :player
+
   # A player can only have one optioned share, and if they do then it
   # has to be the next share they buy.
   belongs_to :optioned_share,
@@ -27,11 +30,13 @@ class Player < ApplicationRecord
 
   def can_set_par?(company)
     return false unless company.director.nil?
-
-
-    # PAR_VALUES = [67,72,77,82,87,93]
-    return false if self.wallet <= 67 * 4
+    return false if self.wallet <= Company::MajorCompany::PAR_VALUES.first * 4
     return true
+  end
+
+  def can_buy_share?(company)
+    share = company.first_unowned_share
+    share.try(:cost).present? && self.wallet > share.cost
   end
 
 end

@@ -1,5 +1,5 @@
 class InstancesController < ApplicationController
-  before_action :set_instance, except: [:index, :new, :create, :show, :create_stub ]
+  before_action :set_instance, except: [:index, :new, :create, :create_stub ]
 
   # GET /instances
   # GET /instances.json
@@ -10,7 +10,6 @@ class InstancesController < ApplicationController
   # GET /instances/1
   # GET /instances/1.json
   def show
-    @instance = Instance.includes([:companies, :players]).find(params[:id])
     @companies = @instance.companies.includes([:bids, :director])
   end
 
@@ -131,7 +130,7 @@ private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_instance
-    @instance = Instance.find(params[:id])
+    @instance = Instance.includes(:players, :companies, :certificates).find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

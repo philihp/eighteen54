@@ -38,6 +38,9 @@ class InstanceInAuction < Instance
     certificate.player = player
     certificate.save
 
+    self.bank += cost
+    self.save
+
     next_player!
 
     # Save who normally would have the active player, because we might go into bidding
