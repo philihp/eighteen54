@@ -15,6 +15,7 @@ class InstanceInStockRound < Instance
   end
 
   def bump_round!
+    clear_round_values!
     self.operating_round_1!
     self.save
     # self.from_round.start_round!
@@ -22,12 +23,20 @@ class InstanceInStockRound < Instance
 
   def start_round!
     self.active_player = self.priority
+    self.stock_rounds += 1
     self.save
   end
 
   def next_player!(options = {})
     super do
       self.priority = self.active_player if options[:save_priority]
+    end
+  end
+
+  def clear_round_values!
+    self.certificates.each do |certificate|
+      certificate.sold_by = nil
+      certificate.save
     end
   end
 

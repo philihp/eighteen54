@@ -11,7 +11,7 @@ class Instance < ApplicationRecord
            dependent: :destroy,
            autosave: true
 
-  has_many :certificates, -> { unowned },
+  has_many :certificates,
            validate: true,
            dependent: :destroy,
            autosave: true
@@ -46,6 +46,7 @@ class Instance < ApplicationRecord
     self.phase ||= 1
     self.bank ||= 10000
     self.passes ||= 0
+    self.stock_rounds ||= 0
   end
 
   def from_round
