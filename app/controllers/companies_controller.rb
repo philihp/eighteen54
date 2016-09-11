@@ -40,7 +40,7 @@ class CompaniesController < ApplicationController
 
   def set_par_and_buy
     par_value = params[:par_value].to_i
-    director_certificate = @company.certificates.where(percent: 40).first
+    director_certificate = @company.directors_certificate
     if @company.cost.present?
       flash[:error] = "Can't set par value. #{@company.name} already one of #{@company.cost}."
     elsif director_certificate.player.present?
@@ -52,9 +52,8 @@ class CompaniesController < ApplicationController
       @instance.bank += money
       @player.save
       director_certificate.player = @player
-      @company.director = @player
       if  director_certificate.save && @company.save && @player.save
-        @instance.from_round.next_player!
+        end_of_round_upkeep!
         flash[:success] = "Par value set to #{par_value} and director certificate awarded to #{@player.name}."
       else
         flash[:error] = 'Unable to set par value and buy director certificate.'
@@ -64,21 +63,36 @@ class CompaniesController < ApplicationController
   end
 
   def buy
-    flash[:notice] = "Bought Share"
     certificate = @company.first_unowned_share
     if @player.wallet < certificate.cost
-      flash[:error] = "#{@player.name} only has #{@player.wallet} G., while the share costs #{certificate.cost}."
+      flash[:error] = "#{@player.name} needs #{certificate.cost} G. to buy the share, but only has #{@player.wallet} G."
     else
       certificate.buy!(@player)
       @instance.passes = 0
       if certificate.save && @player.save && @instance.save
-        @instance.from_round.next_player!
+        end_of_round_upkeep!
         flash[:success] = "#{@player.name} purchased a share of #{certificate.company.name} for #{certificate.cost}."
       else
         flash[:error] = 'Unable to purchase share.'
       end
     end
+    redirect_to @instance
+  end
 
+  def option
+    certificate = @company.first_unowned_share
+    if @player.wallet < certificate.cost / 2
+      flash[:error] = "#{@player.name} needs #{certificate.cost/2} G. to buy an option, but only has #{@player.wallet} G."
+    else
+      certificate.option!(@player)
+      @instance.passes = 0
+      if certificate.save && @player.save && @instance.save
+        end_of_round_upkeep!
+        flash[:success] = "#{@player.name} purchased an option of #{certificate.company.name} for #{certificate.cost}."
+      else
+        flash[:error] = 'Unable to purchase option.'
+      end
+    end
     redirect_to @instance
   end
 
@@ -107,6 +121,11 @@ private
     old_bid = Bid.where(company: @company, player: @player).first
     bankroll = @player.wallet + (old_bid.try(:amount) || 0)
     bankroll >= amount
+  end
+
+  def end_of_round_upkeep!
+    @instance.from_round.next_player! save_priority: true
+    @company.float! if @company.should_float?
   end
 
 end

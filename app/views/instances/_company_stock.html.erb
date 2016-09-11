@@ -30,7 +30,12 @@
           <%= f.submit('Set Par & Buy', class: 'btn btn-primary btn-sm') %>
         <% end %>
       <% elsif player.can_buy_share?(company) %>
-        <%= link_to 'Buy Share', buy_instance_company_path(instance, company), class: 'btn btn-primary btn-sm', method: :post %>
+        <%= bootstrap_form_tag url: buy_instance_company_path(instance, company), layout: :inline  do |f| %>
+          <select class="form-control input-sm" name="par_value" disabled="true">
+            <option><%= company.cost %></option>
+          </select>
+          <%= f.submit('Buy', class: 'btn btn-primary btn-sm') %>
+        <% end %>
       <% end %>
     <% end %>
   </td>

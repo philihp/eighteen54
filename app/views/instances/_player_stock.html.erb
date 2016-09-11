@@ -1,8 +1,4 @@
-
-<ul>
-  <% player.certificates.each do |certificate| %>
-    <li>
-      <%= certificate.percent %>% in <%= certificate.company.name %>
-    </li>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-md-2"><%= player.name %></div>
+  <div class="col-md-2"><%= player.wallet %></div>
+</div>

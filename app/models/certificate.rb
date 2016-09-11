@@ -44,8 +44,15 @@ class Certificate < ApplicationRecord
   def buy!(player)
     money = cost
     player.wallet -= money
-    instance.bank += money
+    self.instance.bank += money
     self.player = player
+    self.instance.save
+  end
+
+  def option!(player)
+    player.optioned_share = self
+    buy!(player)
+    player.save
   end
 
 end

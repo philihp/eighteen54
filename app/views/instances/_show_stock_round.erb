@@ -3,8 +3,13 @@
   <p>Currently in a stock round. Active player can sell any of their Major railway shares, and then buy one share/certificate. They can also pass. Round ends when all players pass consecutively.</p>
 
   <h3>Active Player's Certificates</h3>
-
-  <%= render 'player_stock', player: instance.active_player %>
+  <ul>
+    <% instance.active_player.certificates.each do |certificate| %>
+      <li>
+        <%= certificate.percent %>% in <%= certificate.company.name %>
+      </li>
+    <% end %>
+  </ul>
 
   <h3>Major Companies</h3>
 
@@ -27,4 +32,8 @@
       </td>
     </tr>
   </table>
+<% end %>
+
+<% instance.players.each do |player| %>
+  <%= render 'player_stock', player: player %>
 <% end %>

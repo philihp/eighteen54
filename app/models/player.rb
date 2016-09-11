@@ -29,7 +29,7 @@ class Player < ApplicationRecord
   end
 
   def can_set_par?(company)
-    return false unless company.director.nil?
+    return false unless company.cost.nil?
     return false if self.wallet <= Company::MajorCompany::PAR_VALUES.first * 4
     return true
   end

@@ -25,4 +25,10 @@ class InstanceInStockRound < Instance
     self.save
   end
 
+  def next_player!(options = {})
+    super do
+      self.priority = self.active_player if options[:save_priority]
+    end
+  end
+
 end
