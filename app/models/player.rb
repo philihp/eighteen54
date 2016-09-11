@@ -17,6 +17,8 @@ class Player < ApplicationRecord
              class_name: 'Certificate',
              optional: true
 
+  COLORS = %w(hsla(170,44%,69%,0.75) hsla(60,100%,85%,0.75) hsla(248,30%,79%,0.75) hsla(6,94%,72%,0.75) hsla(205,49%,66%,0.75) hsla(32,97%,69%,0.75) hsla(82,64%,64%,0.75))
+
   after_initialize :set_defaults, unless: :persisted?
 
   def set_defaults

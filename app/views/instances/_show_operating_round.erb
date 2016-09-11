@@ -1,0 +1,18 @@
+<% if instance.operating_round_1? || instance.operating_round_2? || instance.operating_round_3? %>
+  <% @instance.players.each do |player| %>
+    <%= render 'player_stock', player: player %>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-12">
+      hex stock value grid
+      <div class="hex"></div>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      hex map of austria
+    </div>
+  </div>
+<% end %>
