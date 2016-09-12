@@ -1,18 +1,21 @@
 <% if instance.operating_round_1? || instance.operating_round_2? || instance.operating_round_3? %>
-  <% @instance.players.each do |player| %>
-    <%= render 'player_stock', player: player %>
-  <% end %>
 
-  <div class="row">
-    <div class="col-md-12">
-      hex stock value grid
-      <div class="hex"></div>
+  <h3>Market</h3>
 
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      hex map of austria
-    </div>
-  </div>
+  <table class="market-table">
+    <% Company::MajorCompany::MARKET.reverse.each_with_index do |row,y| %>
+      <tr>
+        <% if y < 7 %>
+          <td colspan="<%=7-y%>" style="width: <%= 20*(7-y) %>px"></td>
+        <% end %>
+        <% row.each_with_index do |cell,x| %>
+          <% next if cell.nil? %>
+          <td colspan="2" class="market-cell">
+            <%= cell %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+
 <% end %>
