@@ -19,3 +19,77 @@
   overflow: hidden;
   text-align: center;
 }
+
+.hexbuttons {
+  margin-top: 50px;
+  padding: 50px 0 0 5px;
+}
+.hexr {
+  height: 51px;
+  margin-top: -15px;
+}
+.hexr:nth-child(even) {
+  margin-left: 21px;
+}
+.hexagon {
+  background: lightgoldenrodyellow;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  font-size: 36px;
+  height: 25px;
+  margin: 0 2px 0 0;
+  position: relative;
+  width: 40px;
+}
+.hexagon:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 10px solid lightgoldenrodyellow;
+}
+.hexagon:after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 10px solid lightgoldenrodyellow;
+}
+.hexagon span {
+  display: block;
+  height: 100%;
+  padding-top: 8px;
+  text-align: center;
+  width: 100%;
+}
+.hexagon span::before {
+  content: attr(title);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10px;
+  font-size: small;
+  //opacity: 0;
+  position: absolute;
+  //top: -5px;
+  top: 5px;
+  left: 0;
+  text-transform: uppercase;
+#  transition: 0.1s all ease-in-out;
+  width: 100%;
+}
+.hexagon:hover span::before {
+  //opacity: 1;
+  top: 5px;
+  //transition: 0.1s all ease-in-out;
+}

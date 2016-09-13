@@ -18,4 +18,14 @@
     <% end %>
   </table>
 
+  <div class='hexbuttons'>
+    <% Company::MajorCompany::MARKET.reverse.each_with_index do |row,y| %>
+    <div class='hexr'>
+      <% row.each_with_index do |cell,x| %>
+      <div class='hexagon'><span title='<%= cell %>'></span></div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+
 <% end %>
