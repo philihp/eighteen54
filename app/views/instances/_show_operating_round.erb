@@ -3,29 +3,22 @@
   <h3>Market</h3>
 
   <table class="market-table">
-    <% Company::MajorCompany::MARKET.reverse.each_with_index do |row,y| %>
+    <% instance.from_round.market.reverse.each_with_index do |row,y| %>
       <tr>
-        <% if y < 7 %>
-          <td colspan="<%=7-y%>" style="width: <%= 20*(7-y) %>px"></td>
-        <% end %>
+        <td colspan="<%=(6-y).abs+1%>" style="width: <%= 20*(6-y).abs+1 %>px"></td>
         <% row.each_with_index do |cell,x| %>
-          <% next if cell.nil? %>
+          <% next if cell[:value].nil? %>
           <td colspan="2" class="market-cell">
-            <%= cell %>
+            <div class="market-value"><%= cell[:value] %></div>
+            <% cell[:companies].each do |company| %>
+              <div class="market-token" style="background-color: <%= company.color %>">
+                <%= company.abbr %>
+              </div>
+            <% end %>
           </td>
         <% end %>
       </tr>
     <% end %>
   </table>
-
-  <div class='hexbuttons'>
-    <% Company::MajorCompany::MARKET.reverse.each_with_index do |row,y| %>
-    <div class='hexr'>
-      <% row.each_with_index do |cell,x| %>
-      <div class='hexagon'><span title='<%= cell %>'></span></div>
-      <% end %>
-    </div>
-    <% end %>
-  </div>
 
 <% end %>

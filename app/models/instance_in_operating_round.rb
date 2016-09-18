@@ -10,4 +10,24 @@ class InstanceInOperatingRound < Instance
     end
   end
 
+  def majors
+    self.companies.select { |c| c.charter_type == :major }
+  end
+
+  def market
+    market = Company::MajorCompany::MARKET.map do |row|
+      row.map do |cell|
+        {
+          companies: [],
+          value: cell,
+        }
+      end
+    end
+    majors.each do |company|
+      next if company.value_y.nil? or company.value_x.nil?
+      market[company.value_y][company.value_x][:companies] << company
+    end
+    market
+  end
+
 end

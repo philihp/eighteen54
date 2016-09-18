@@ -6,32 +6,101 @@
 //https://codepen.io/elbarto84/pen/wrcob
 
 .market-table {
+  position: relative;
   table-layout: fixed;
-  width: 900px;
+  width: 880px;
 }
 
 .market-cell {
+  position: relative;
   height: 35px;
   width: 40px;
-  font-size: xx-small;
+  font-size: x-small;
   background-color: lightgoldenrodyellow;
   border: 1px solid palegoldenrod;
   overflow: hidden;
   text-align: center;
+  vertical-align: middle;
 }
 
-.hexbuttons {
-  margin-top: 50px;
-  padding: 50px 0 0 5px;
+.market-value {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  text-align: right;
+  opacity: 0.5;
+  vertical-align: bottom;
+  font-size: xx-small;
 }
-.hexr {
+
+.market-token {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  border: 1px solid black;
+  background-color: grey; // this should be overridden
+  border-radius: 10px;
+}
+
+.market-token:nth-child(4) {
+  top: 2px;
+  left: 3px;
+}
+.market-token:nth-child(3) {
+  top: 4px;
+  left: 6px;
+}
+.market-token:nth-child(2) {
+  top: 6px;
+  left: 9px;
+}
+.market-token:nth-child(1) {
+  top: 8px;
+  left: 12px;
+}
+
+/*
+.hextable {
+  margin-top: 60px;
+}
+
+.hexrow {
   height: 51px;
   margin-top: -15px;
 }
-.hexr:nth-child(even) {
+.hexrow:nth-child(0) {
+  margin-left: 141px;
+}
+.hexrow:nth-child(1) {
+  margin-left: 121px;
+}
+.hexrow:nth-child(2) {
+  margin-left: 101px;
+}
+.hexrow:nth-child(3) {
+  margin-left: 81px;
+}
+.hexrow:nth-child(4) {
+  margin-left: 61px;
+}
+.hexrow:nth-child(5) {
+  margin-left: 41px;
+}
+.hexrow:nth-child(6) {
+  margin-left: 21px;
+}
+.hexrow:nth-child(7) {
+  margin-left: 1px;
+}
+.hexrow:nth-child(8) {
   margin-left: 21px;
 }
 .hexagon {
+  border: 0 solid palegoldenrod;
+  border-width: 0 1px;
   background: lightgoldenrodyellow;
   display: inline-flex;
   align-items: center;
@@ -79,9 +148,9 @@
   justify-content: center;
   height: 10px;
   font-size: small;
-  //opacity: 0;
+  opacity: 0;
   position: absolute;
-  //top: -5px;
+  top: -5px;
   top: 5px;
   left: 0;
   text-transform: uppercase;
@@ -89,7 +158,8 @@
   width: 100%;
 }
 .hexagon:hover span::before {
-  //opacity: 1;
+  opacity: 1;
   top: 5px;
-  //transition: 0.1s all ease-in-out;
+  transition: 0.1s all ease-in-out;
 }
+*/
