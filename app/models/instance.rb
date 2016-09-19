@@ -48,6 +48,8 @@ class Instance < ApplicationRecord
     self.passes ||= 0
     self.stock_rounds ||= 0
     self.sequence ||= 1
+    self.small_mail_contract ||= 6
+    self.large_mail_contract ||= 6
   end
 
   def from_round
@@ -86,6 +88,16 @@ class Instance < ApplicationRecord
   def next_player
     next_turn_order = (self.active_player.turn_order + 1) % self.players.count
     self.players.where(turn_order: next_turn_order).first
+  end
+
+  def phase_color
+    case self.phase
+      when 1..2 then :yellow
+      when 3..4 then :green
+      when 5..6 then :brown
+      when 7..8 then :gray
+      else :unknown
+    end
   end
 
 end

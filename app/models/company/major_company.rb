@@ -3,6 +3,23 @@ module Company
 
     PAR_VALUES = [67,72,77,82,87,93].sort
 
+    MAIL_CONTRACT_SMALL_COST = 100
+    MAIL_CONTRACT_LARGE_COST = 200
+
+    MAIL_CONTRACT_SMALL_REVENUE = {
+      yellow: 10,
+      green: 20,
+      brown: 30,
+      gray: 40,
+    }
+
+    MAIL_CONTRACT_LARGE_REVENUE = {
+      yellow: 30,
+      green: 40,
+      brown: 50,
+      gray: 60,
+    }
+
     MARKET = [
       [nil, 54, 57, 60, 63 ],
       [ 56, 59, 62, 65, 68, 71 ],
@@ -182,6 +199,49 @@ module Company
       # * If price is equal, the marker to the right goes first
       # * If markers are on the same spot, the marker on top goes first
       "#{value.to_s.rjust(3,'0')}-#{self.value_y.to_s.rjust(2,'0')}-#{self.value_set_at_sequence.to_s.rjust(8,'0')}"
+    end
+
+    def can_buy_small_mail_contract?
+      self.no_mail_contract? && self.treasury >= 100 && self.instance.small_mail_contracts > 0
+    end
+
+    def can_buy_large_mail_contract?
+      self.no_mail_contract? && self.treasury >= 200 && self.instance.large_mail_contracts > 0
+    end
+
+    def buy_small_mail_contract!
+      return unless can_buy_small_mail_contract?
+      self.instance.small_mail_contracts -= 1
+      self.small_mail_contract!
+      self.treasury -= MAIL_CONTRACT_SMALL_COST
+      self.instance.bank += MAIL_CONTRACT_SMALL_COST
+      self.save
+      self.instance.save
+    end
+
+    def buy_large_mail_contract!
+      return unless can_buy_large_mail_contract?
+      self.instance.large_mail_contracts -= 1
+      self.large_mail_contract!
+      self.treasury -= MAIL_CONTRACT_LARGE_COST
+      self.instance.bank += MAIL_CONTRACT_LARGE_COST
+      self.save
+      self.instance.save
+    end
+
+    def mail_contract_revenue
+      if self.small_mail_contract?
+        MAIL_CONTRACT_SMALL_REVENUE[self.instance.phase_color]
+      elsif self.large_mail_contract?
+        MAIL_CONTRACT_LARGE_REVENUE[self.instance.phase_color]
+      end || 0
+    end
+
+    def pay_mail_contract_income!
+      revenue = mail_contract_revenue
+      self.treasury += revenue
+      self.instance.bank -= revenue
+      self.instance.save && self.save
     end
 
   end

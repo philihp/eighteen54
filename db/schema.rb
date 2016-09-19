@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919014232) do
+ActiveRecord::Schema.define(version: 20160919031800) do
 
   create_table "bids", force: :cascade do |t|
     t.integer  "player_id"
@@ -52,14 +52,15 @@ ActiveRecord::Schema.define(version: 20160919014232) do
     t.integer  "value_y"
     t.integer  "value_set_at_sequence"
     t.boolean  "needs_to_operate"
+    t.integer  "mail_contract"
     t.index ["director_id"], name: "index_companies_on_director_id"
     t.index ["instance_id"], name: "index_companies_on_instance_id"
   end
 
   create_table "instances", force: :cascade do |t|
     t.integer  "round"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "phase"
     t.integer  "bank"
     t.string   "name"
@@ -69,6 +70,9 @@ ActiveRecord::Schema.define(version: 20160919014232) do
     t.integer  "active_company_id"
     t.integer  "stock_rounds"
     t.integer  "sequence"
+    t.integer  "small_mail_contract"
+    t.integer  "large_mail_contract"
+    t.integer  "activity"
     t.index ["active_company_id"], name: "index_instances_on_active_company_id"
     t.index ["priority_id"], name: "index_instances_on_priority_id"
   end

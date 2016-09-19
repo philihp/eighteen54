@@ -20,6 +20,12 @@ module Company
 
     after_create :create_certificates!
 
+    enum mail_contract: {
+      no_mail_contract: 0,
+      small_mail_contract: 1,
+      large_mail_contract: 2,
+    }
+
     def name
       self.class.name.demodulize
     end
@@ -27,6 +33,7 @@ module Company
     def set_defaults
       self.tapped = false
       self.cost ||= nil
+      self.mail_contract ||= 0
     end
 
     def income
