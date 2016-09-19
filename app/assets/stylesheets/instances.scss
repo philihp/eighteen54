@@ -47,7 +47,8 @@
         top: 8 - ($i)*2px;
         left: 12 - ($i)*3px;
         z-index: #{$i};
-        transition: all 0.1s ease-out;
+        transition: none 0.1s ease-out;
+        transition-property: top,left;
       }
     }
   }
@@ -60,7 +61,8 @@
 
     @for $i from 0 through 4 {
       .market-token:nth-child(#{$i+1}) {
-        transition: all 0.1s ease-out;
+        transition: none 0.1s ease-out;
+        transition-property: top,left;
         top: 8 - ($i)*16px;
         left: 12px;
       }
@@ -68,114 +70,9 @@
   }
 }
 
-
-
-
-/*
-.hextable {
-  margin-top: 60px;
-}
-
-.hexrow {
-  height: 51px;
-  margin-top: -15px;
-}
-.hexrow:nth-child(0) {
-  margin-left: 141px;
-}
-.hexrow:nth-child(1) {
-  margin-left: 121px;
-}
-.hexrow:nth-child(2) {
-  margin-left: 101px;
-}
-.hexrow:nth-child(3) {
-  margin-left: 81px;
-}
-.hexrow:nth-child(4) {
-  margin-left: 61px;
-}
-.hexrow:nth-child(5) {
-  margin-left: 41px;
-}
-.hexrow:nth-child(6) {
-  margin-left: 21px;
-}
-.hexrow:nth-child(7) {
-  margin-left: 1px;
-}
-.hexrow:nth-child(8) {
-  margin-left: 21px;
-}
-.hexagon {
-  border: 0 solid palegoldenrod;
-  border-width: 0 1px;
-  background: lightgoldenrodyellow;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  float: left;
-  font-size: 36px;
-  height: 25px;
-  margin: 0 2px 0 0;
-  position: relative;
-  width: 40px;
-}
-.hexagon:before {
-  content: "";
-  position: absolute;
-  top: -10px;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-bottom: 10px solid lightgoldenrodyellow;
-}
-.hexagon:after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
-  border-top: 10px solid lightgoldenrodyellow;
-}
-.hexagon span {
-  display: block;
-  height: 100%;
-  padding-top: 8px;
-  text-align: center;
-  width: 100%;
-}
-.hexagon span::before {
-  content: attr(title);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 10px;
-  font-size: small;
-  opacity: 0;
-  position: absolute;
-  top: -5px;
-  top: 5px;
-  left: 0;
-  text-transform: uppercase;
-#  transition: 0.1s all ease-in-out;
-  width: 100%;
-}
-.hexagon:hover span::before {
-  opacity: 1;
-  top: 5px;
-  transition: 0.1s all ease-in-out;
-}
-*/
-
-#local-map .map-cell {
+.map-cell {
   pointer-events: visiblePainted;
   fill: hsl(60,10%,95%);
-  stroke: hsl(0, 0%, 70%);
+  stroke: hsl(0, 0%, 80%);
   stroke-width: 0.5;
 }

@@ -119,8 +119,10 @@ class InstanceInOperatingRound < Instance
 
   def local_map
     Map::LocalMap.new
+  end
 
-
+  def major_map
+    Map::MajorMap.new
   end
 
 end

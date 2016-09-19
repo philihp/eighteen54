@@ -34,7 +34,7 @@ module Map
       map.key
     end
 
-    def cols(row)
+    def cols(row=nil)
       map[row].keys
     end
 
