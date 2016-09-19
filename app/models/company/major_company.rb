@@ -50,6 +50,8 @@ module Company
         self.value_x -= 1
         self.value_y += 1
       end
+      set_sequence!
+      self.save
     end
 
     def update_value_from_selling_train_to_another_company!
@@ -57,6 +59,8 @@ module Company
         self.value_x += 1
         self.value_y -= 1
       end
+      set_sequence!
+      self.save
     end
 
     def update_value_from_not_paying_dividend!
@@ -68,6 +72,8 @@ module Company
         self.value_x = 0
         self.value_y -= 1
       end
+      set_sequence!
+      self.save
     end
 
     def update_value_from_paying_dividend!
@@ -78,15 +84,30 @@ module Company
         self.value_y += 1
       end
       # TODO split! if should_split?
+      set_sequence!
+      self.save
     end
 
     def update_value_from_all_shares_sold!
       self.value_y += 1 if value(self.value_x, self.value_y+1).present?
       # TODO split! if should_split?
+      set_sequence!
+      self.save
     end
 
     def update_value_from_selling_share!
       self.value_y -= 1 if value(self.value_x, self.value_y-1).present?
+      set_sequence!
+      self.save
+    end
+
+    def set_sequence!
+      # Ensures that when a marker is placed on the same spot as other pieces,
+      # it will be placed the existing markers. Important because turn order
+      # says the marker on top goes first.
+      self.instance.bump_sequence!
+      self.value_set_at_sequence = self.instance.sequence
+      self.save
     end
 
     def should_split?
@@ -120,6 +141,10 @@ module Company
       self.instance.save
     end
 
+    def operates?
+      self.director.present?
+    end
+
     def directors_certificate
       # self.certificates.order(percent: :desc).first
       @directors_certificate ||= self.certificates.where(percent: 40).first
@@ -149,6 +174,14 @@ module Company
         cert.player = to_player
         cert.save
       end
+    end
+
+    def turn_ordering
+      # Used as a sorting key... basically a shortcut for...
+      # * Highest price goes first
+      # * If price is equal, the marker to the right goes first
+      # * If markers are on the same spot, the marker on top goes first
+      "#{value.to_s.rjust(3,'0')}-#{self.value_y.to_s.rjust(2,'0')}-#{self.value_set_at_sequence.to_s.rjust(8,'0')}"
     end
 
   end

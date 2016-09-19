@@ -19,5 +19,9 @@ module Company
       self.certificates << Certificate.create(instance: instance, company: self, percent: 100)
     end
 
+    def turn_ordering
+      "000-00-00000000"
+    end
+
   end
 end

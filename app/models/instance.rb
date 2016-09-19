@@ -47,6 +47,7 @@ class Instance < ApplicationRecord
     self.bank ||= 10000
     self.passes ||= 0
     self.stock_rounds ||= 0
+    self.sequence ||= 1
   end
 
   def from_round
@@ -68,6 +69,11 @@ class Instance < ApplicationRecord
 
   def bump_phase!
     self.phase += 1 if self.phase < 7
+  end
+
+  def bump_sequence!
+    self.sequence += 1
+    self.save
   end
 
   def next_player!(block=nil)

@@ -72,5 +72,9 @@ module Company
       self.cost = i
     end
 
+    def turn_ordering
+      "?"
+    end
+
   end
 end

@@ -18,7 +18,7 @@ class InstanceInStockRound < Instance
     clear_round_values!
     self.operating_round_1!
     self.save
-    # self.from_round.start_round!
+    self.from_round.start_round!
   end
 
   def start_round!

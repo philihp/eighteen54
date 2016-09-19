@@ -15,10 +15,19 @@
               </div>
             <% end %>
             <div class="market-value"><%= cell[:value] %></div>
+            <%#= "#{x},#{y}" %>
           </td>
         <% end %>
       </tr>
     <% end %>
   </table>
+
+  <h3>Turn Order</h3>
+
+  <ul>
+    <% instance.from_round.company_turn_order.each do |company| %>
+      <li><%= company %></li>
+    <% end %>
+  </ul>
 
 <% end %>

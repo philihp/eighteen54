@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160911105731) do
+ActiveRecord::Schema.define(version: 20160919014232) do
 
   create_table "bids", force: :cascade do |t|
     t.integer  "player_id"
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20160911105731) do
   create_table "companies", force: :cascade do |t|
     t.integer  "instance_id"
     t.string   "type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
     t.boolean  "tapped"
     t.integer  "cost"
     t.integer  "director_id"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20160911105731) do
     t.integer  "round_value"
     t.integer  "value_x"
     t.integer  "value_y"
+    t.integer  "value_set_at_sequence"
+    t.boolean  "needs_to_operate"
     t.index ["director_id"], name: "index_companies_on_director_id"
     t.index ["instance_id"], name: "index_companies_on_instance_id"
   end
@@ -66,6 +68,7 @@ ActiveRecord::Schema.define(version: 20160911105731) do
     t.integer  "priority_id"
     t.integer  "active_company_id"
     t.integer  "stock_rounds"
+    t.integer  "sequence"
     t.index ["active_company_id"], name: "index_instances_on_active_company_id"
     t.index ["priority_id"], name: "index_instances_on_priority_id"
   end
