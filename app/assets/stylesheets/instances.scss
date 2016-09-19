@@ -76,3 +76,7 @@
   stroke: hsl(0, 0%, 80%);
   stroke-width: 0.5;
 }
+
+.map-cell:hover {
+  fill: hsl(60, 10%, 90%);
+}

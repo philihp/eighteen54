@@ -36,7 +36,7 @@
 
   <svg id="major-map" width="<%= Map::Tile::W * 27 %>" height="<%= Map::Tile::H * 7 %>">
     <% instance.from_round.major_map.map.each_with_index do |(row,row_hash),y| %>
-      <g class="map-row" transform="transform(0,0)">
+      <g class="map-row">
         <% row_hash.each_with_index do |(col,cell),x| %>
           <% next if cell.nil? %>
           <polygon transform="translate(<%= (x*2 + (y.even? ? 1 : 0))*Map::Tile::W/2 + Map::Tile::W/2 %>,<%= (y*0.75+0.5)*Map::Tile::H %>)" class="map-cell" points="<%= cell.points %>">
@@ -49,7 +49,7 @@
 
   <svg id="local-map" width="<%= Map::Tile::W * 6 %>" height="<%= Map::Tile::H * 2.5 %>">
     <% instance.from_round.local_map.map.each_with_index do |(row,row_hash),y| %>
-      <g class="map-row" transform="transform(0,0)">
+      <g class="map-row">
         <% row_hash.each_with_index do |(col,cell),x| %>
           <% next if cell.nil? %>
           <polygon transform="translate(<%= (x*2 + (y.even? ? 1 : 0))*Map::Tile::W/2 + Map::Tile::W/2 %>,<%= (y*0.75+0.5)*Map::Tile::H %>)" class="map-cell" points="<%= cell.points %>">
