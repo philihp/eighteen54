@@ -41,6 +41,17 @@ class Instance < ApplicationRecord
     operating_round_3: 6,
   }
 
+  # Only used in InstanceInOperatingRound, but needs to be here because it's not a true STI
+  enum activity: {
+    activity_mail_contract_pays_income: 1,
+    activity_build_track: 2,
+    activity_place_station_marker: 3,
+    activity_run_trains: 4,
+    activity_distribute_revenue: 5,
+    activity_purchase_trains: 6,
+    activity_purchase_mail_contract: 7,
+  }
+
   def set_defaults
     self.round ||= 0
     self.phase ||= 1
