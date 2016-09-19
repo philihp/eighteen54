@@ -90,7 +90,7 @@ class InstanceInOperatingRound < Instance
   def company_turn_order
     companies = self.companies.select do |company|
       company.needs_to_operate
-    end.sort_by(&:turn_ordering)
+    end.sort_by(&:turn_order)
     # .map do |company|
     #   "[#{company.id} #{company.name} #{company.turn_ordering}]"
     # end
@@ -117,7 +117,7 @@ class InstanceInOperatingRound < Instance
     majors.each do |company|
       next if company.value_y.nil? or company.value_x.nil? or company.value_set_at_sequence.nil?
       companies = market[company.value_y][company.value_x][:companies] << company
-      companies.sort_by! { |c| -(c.value_set_at_sequence) }
+      companies.sort_by! { |c| [-c.value, c.value_y, -c.value_set_at_sequence] }
     end
     market
   end

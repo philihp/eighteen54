@@ -22,11 +22,11 @@
     <% end %>
   </table>
 
-  <h3>Turn Order</h3>
+  <h3>Companies to Operate</h3>
 
   <ul>
     <% instance.from_round.company_turn_order.each do |company| %>
-      <li><%= company %></li>
+      <li><%= company.id %> - <%= company.name %> - <%=company.turn_order %></li>
     <% end %>
   </ul>
 

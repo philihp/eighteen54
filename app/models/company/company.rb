@@ -79,8 +79,8 @@ module Company
       self.cost = i
     end
 
-    def turn_ordering
-      "?"
+    def turn_order
+      [0,0,0]
     end
 
   end

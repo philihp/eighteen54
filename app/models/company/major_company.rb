@@ -153,6 +153,7 @@ module Company
       swap_director_certificate_with!(self.director)
       self.treasury = self.cost * 10
       self.instance.bank -= self.treasury
+      self.set_sequence!
 
       self.save
       self.instance.save
@@ -193,12 +194,12 @@ module Company
       end
     end
 
-    def turn_ordering
+    def turn_order
       # Used as a sorting key... basically a shortcut for...
       # * Highest price goes first
       # * If price is equal, the marker to the right goes first
       # * If markers are on the same spot, the marker on top goes first
-      "#{value.to_s.rjust(3,'0')}-#{self.value_y.to_s.rjust(2,'0')}-#{self.value_set_at_sequence.to_s.rjust(8,'0')}"
+      [-value, value_y, value_set_at_sequence]
     end
 
     def can_buy_small_mail_contract?

@@ -20,7 +20,7 @@ module Company
     end
 
     def turn_ordering
-      "000-00-00000000"
+      [0,0,0]
     end
 
   end
