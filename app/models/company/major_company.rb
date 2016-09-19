@@ -20,17 +20,6 @@ module Company
       gray: 60,
     }
 
-    MARKET = [
-      [nil, 54, 57, 60, 63 ],
-      [ 56, 59, 62, 65, 68, 71 ],
-      [ 61, 64, 67, 70, 73, 76, 79 ],
-      [ 66, 69, 72, 75, 78, 81, 85, 89 ],
-      [ 71, 74, 77, 80, 83, 87, 91, 95,100 ],
-      [ 76, 79, 82, 85, 89, 93, 97,102,108,115,123 ],
-      [ 81, 84, 87, 91, 95, 99,104,110,117,125,134,143,153,165,180,200 ],
-      [ 86, 89, 93, 97,101,106,112,119,127,136,146,158,170,185,210,230,250,275,300 ],
-    ]
-
     # scope :major, -> do
     #   where(type: [
     #     Company::KaiserinElisabethWestbahn.name,
@@ -58,8 +47,8 @@ module Company
     def value(x=self.value_x, y=self.value_y)
       return nil if y.nil? || y < 0 ||
                     x.nil? || x < 0 ||
-                    MARKET[y].nil?
-      return MARKET[y][x]
+                    Instance::MARKET[y].nil?
+      return Instance::MARKET[y][x]
     end
 
     def update_value_from_buying_train_from_another_company!

@@ -4,6 +4,13 @@
   |
   <b>Activity</b> <%= instance.from_round.activity %>
 
+  <h3>Companies to Operate</h3>
+
+  <ul>
+    <% instance.from_round.company_turn_order.each do |company| %>
+      <li><%= company.id %> - <%= company.name %> - <%=company.turn_order %></li>
+    <% end %>
+  </ul>
 
   <h3>Market</h3>
 
@@ -13,7 +20,7 @@
         <td colspan="<%=(6-y).abs+1%>" style="width: <%= 20*(6-y).abs+1 %>px"></td>
         <% row.each_with_index do |cell,x| %>
           <% next if cell[:value].nil? %>
-          <td colspan="2" class="market-cell">
+          <td colspan="2" class="<%= (["market-cell"]+cell[:class]).join(' ') %>">
             <% cell[:companies].each do |company| %>
               <div class="market-token" style="background-color: <%= company.color %>">
                 <%= company.abbr %>
@@ -27,12 +34,45 @@
     <% end %>
   </table>
 
-  <h3>Companies to Operate</h3>
+  <h3>Major Map</h3>
 
-  <ul>
-    <% instance.from_round.company_turn_order.each do |company| %>
-      <li><%= company.id %> - <%= company.name %> - <%=company.turn_order %></li>
-    <% end %>
-  </ul>
+  <h3>Local Map</h3>
+
+  <svg id="local-map" width="800" height="400">
+    <g  transform="scale(2)">
+    <%# instance.from_round.local_map.map.each do |row,row_hash| %>
+    <%# row_hash.each do |col,cell| %>
+      <g class="map-row" transform="transform(0,0)">
+        <polygon transform="translate(43.302,25)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(86.604,25)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(129.906,25)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(173.208,25)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(216.51,25)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+      </g>
+      <g class="map-row" transform="transform(0,0)">
+        <polygon transform="translate(21.651,62.5)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(64.953,62.5)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(108.255,62.5)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(151.557,62.5)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(194.859,62.5)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(238.161,62.5)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+      </g>
+      <g class="map-row" transform="transform(0,0)">
+        <polygon transform="translate(43.302,100)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(86.604,100)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(129.906,100)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(173.208,100)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+        <polygon transform="translate(216.51,100)" class="map-cell" points="0,25 21.651,12.5 21.651,-12.5 0,-25 -21.651,-12.5 -21.651,12.5" />
+      </g>
+    </g>
+    <%# end %>
+  </svg>
+
+  0,25
+  21.651,12.5
+  21.651,-12.5
+  0,-25
+  -21.651,-12.5
+  -21.651,12.5
 
 <% end %>

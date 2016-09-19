@@ -96,13 +96,18 @@ class InstanceInOperatingRound < Instance
   end
 
   def market
-    market = Company::MajorCompany::MARKET.map do |row|
+    market = MARKET.map do |row|
       row.map do |cell|
         {
           companies: [],
           value: cell,
+          class: []
         }
       end
+    end
+    MARKET_BASEMENT.each do |coords|
+      (y,x) = coords
+      market[y][x][:class] << 'market-basement'
     end
     majors.each do |company|
       next if company.value_y.nil? or company.value_x.nil? or company.value_set_at_sequence.nil?
@@ -110,6 +115,12 @@ class InstanceInOperatingRound < Instance
       companies.sort_by! { |c| [-c.value, c.value_y, -c.value_set_at_sequence] }
     end
     market
+  end
+
+  def local_map
+    Map::LocalMap.new
+
+
   end
 
 end

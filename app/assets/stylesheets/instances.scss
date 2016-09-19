@@ -47,17 +47,22 @@
         top: 8 - ($i)*2px;
         left: 12 - ($i)*3px;
         z-index: #{$i};
-        transition: all 0.3s ease-out;
+        transition: all 0.1s ease-out;
       }
     }
+  }
+
+  .market-basement {
+    background-color: #f2eebf;
   }
 
   .market-cell:hover {
 
     @for $i from 0 through 4 {
       .market-token:nth-child(#{$i+1}) {
-        transition: all 0.3s ease-out;
-        top: 8 - ($i)*18px;
+        transition: all 0.1s ease-out;
+        top: 8 - ($i)*16px;
+        left: 12px;
       }
     }
   }
@@ -167,3 +172,10 @@
   transition: 0.1s all ease-in-out;
 }
 */
+
+#local-map .map-cell {
+  pointer-events: visiblePainted;
+  fill: hsl(60,10%,95%);
+  stroke: hsl(0, 0%, 70%);
+  stroke-width: 0.5;
+}
