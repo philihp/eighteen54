@@ -9,58 +9,62 @@
   position: relative;
   table-layout: fixed;
   width: 880px;
+
+  .market-cell {
+    position: relative;
+    height: 35px;
+    width: 40px;
+    font-size: x-small;
+    background-color: lightgoldenrodyellow;
+    border: 1px solid palegoldenrod;
+    text-align: center;
+    vertical-align: middle;
+
+    .market-value {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+      text-align: right;
+      opacity: 0.5;
+      vertical-align: bottom;
+      font-size: xx-small;
+    }
+
+    .market-token {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      height: 20px;
+      width: 20px;
+      border: 1px solid black;
+      background-color: grey; // this should be overridden
+      border-radius: 10px;
+    }
+    @for $i from 0 through 4 {
+      .market-token:nth-child(#{$i+1}) {
+        top: 8 - ($i)*2px;
+        left: 12 - ($i)*3px;
+        z-index: #{$i};
+        transition: all 0.3s ease-out;
+      }
+    }
+  }
+
+  .market-cell:hover {
+
+    @for $i from 0 through 4 {
+      .market-token:nth-child(#{$i+1}) {
+        transition: all 0.3s ease-out;
+        top: 8 - ($i)*18px;
+      }
+    }
+  }
 }
 
-.market-cell {
-  position: relative;
-  height: 35px;
-  width: 40px;
-  font-size: x-small;
-  background-color: lightgoldenrodyellow;
-  border: 1px solid palegoldenrod;
-  overflow: hidden;
-  text-align: center;
-  vertical-align: middle;
-}
 
-.market-value {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  z-index: 2;
-  text-align: right;
-  opacity: 0.5;
-  vertical-align: bottom;
-  font-size: xx-small;
-}
 
-.market-token {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 20px;
-  width: 20px;
-  border: 1px solid black;
-  background-color: grey; // this should be overridden
-  border-radius: 10px;
-}
-
-.market-token:nth-child(4) {
-  top: 2px;
-  left: 3px;
-}
-.market-token:nth-child(3) {
-  top: 4px;
-  left: 6px;
-}
-.market-token:nth-child(2) {
-  top: 6px;
-  left: 9px;
-}
-.market-token:nth-child(1) {
-  top: 8px;
-  left: 12px;
-}
 
 /*
 .hextable {

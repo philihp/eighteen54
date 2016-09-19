@@ -9,12 +9,12 @@
         <% row.each_with_index do |cell,x| %>
           <% next if cell[:value].nil? %>
           <td colspan="2" class="market-cell">
-            <div class="market-value"><%= cell[:value] %></div>
             <% cell[:companies].each do |company| %>
               <div class="market-token" style="background-color: <%= company.color %>">
                 <%= company.abbr %>
               </div>
             <% end %>
+            <div class="market-value"><%= cell[:value] %></div>
           </td>
         <% end %>
       </tr>
