@@ -1,0 +1,62 @@
+<g transform="translate(<%= Map::Tile::W/2 * offset*3 %>,<%= Map::Tile::H %>)"
+   class="map-cell <%= "map-#{color}" if color.present?  %>">
+  <defs>
+    <clipPath id="hexmask">
+      <polygon
+        points="<%= Map::Tile.points %>">
+      </polygon>
+    </clipPath>
+  </defs>
+  <filter id="trackborder">
+    <feFlood flood-color="white" result="rFlood" />
+    <feMorphology result="rMorph" in="SourceGraphic" operator="dilate" radius="1"/>
+    <feColorMatrix result="rMask" in="rMorph" type="matrix"
+                   values="0 0 0 0 0
+                           0 0 0 0 0
+                           0 0 0 0 0
+                           0 0 0 1 0" />
+    <feComposite result="rComposite" in="rFlood" in2="rMask" operator="in" />
+    <feBlend result="rBlend" in="SourceGraphic" in2="rComposite" mode="normal" />
+    <feGaussianBlur result="rBlur" in="SourceAlpha" stdDeviation="1.5"/>
+    <feMerge>
+      <feMergeNode in="rBlur" />
+      <feMergeNode in="rBlend"/>
+    </feMerge>
+  </filter>
+
+  <polygon class="tile-border"
+    points="<%= Map::Tile.points %>">
+  </polygon>
+  <g class="tile-contents" clip-path="url(#hexmask)" style="filter:url(#trackborder)">
+    <circle cx="0" cy="<%= Map::Tile::H/2 %>" r="<%= Map::Tile::H/4 %>" class="tile-track" />
+    <circle cx="0" cy="<%=-Map::Tile::H/2 %>" r="<%= Map::Tile::H/4 %>" class="tile-track" />
+    <circle cx="<%=-Map::Tile::W/2 %>" cy="<%= Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="tile-track" />
+    <circle cx="<%= Map::Tile::W/2 %>" cy="<%= Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="tile-track" />
+    <path d="M <%= Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
+             L <%=-Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>
+            " class="tile-track"  class="tile-track"/>
+  </g>
+</g>
+
+<!--
+
+    <path d="M <%=-Map::Tile::W*1/4 %> <%= Map::Tile::H*3/8 %>
+             A <%= Map::Tile::W*2/6 %> <%= Map::Tile::H*2/9 %> 0 1 0 <%= Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
+            " class="tile-track" />
+
+            L 0 <%= Map::Tile::H/2 %> -- bottom point
+
+A <%=-Map::Tile::W/4 %> <%= Map::Tile::H*1/8 %> 10 10 1 20 20
+
+    <path d="M <%= Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
+             L <%=-Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>
+            " class="tile-track" />
+    <path d="M <%=-Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
+             L <%= Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>
+            " class="tile-track" />
+    <path d="M <%=-Map::Tile::W/2 %> 0
+             L <%= Map::Tile::W/2 %> 0
+            " class="tile-track" />
+
+
+-->

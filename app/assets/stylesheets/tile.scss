@@ -1,0 +1,43 @@
+// Place all the styles related to the Tile controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.map-cell {
+  pointer-events: visiblePainted;
+  stroke: hsl(0, 0%, 80%);
+  stroke-width: 0.5;
+
+  .tile-contents {
+    fill: none;
+
+    .tile-track {
+      stroke-width: 3;
+      stroke: #3f3f3f;
+    }
+  }
+
+}
+
+.map-cell:hover {
+  fill: hsl(60, 10%, 90%);
+}
+
+.map-cell {
+  fill: #f7fcf0;
+}
+
+.map-yellow {
+  fill: #e0f3db;
+}
+
+.map-green {
+  fill: #ccebc5;
+}
+
+.map-brown {
+  fill: #a8ddb5;
+}
+
+.map-grey {
+  fill: #7bccc4;
+}

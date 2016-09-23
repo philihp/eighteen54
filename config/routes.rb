@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tile/view'
+
   get 'welcome/index'
   root 'welcome#index'
 

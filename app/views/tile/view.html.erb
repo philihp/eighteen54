@@ -1,0 +1,11 @@
+<%= stylesheet_link_tag 'tile', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<svg id="local-map" width="<%= 2+ Map::Tile::W * 10 %>" height="<%= 2+ Map::Tile::H * 2.5 %>">
+  <g class="map-row" transform="translate(1,1)">
+    <%= render 'tile', offset: 1, color: nil  %>
+    <%= render 'tile', offset: 2, color: 'yellow' %>
+    <%= render 'tile', offset: 3, color: 'green' %>
+    <%= render 'tile', offset: 4, color: 'brown' %>
+    <%= render 'tile', offset: 5, color: 'grey' %>
+  </g>
+</svg>

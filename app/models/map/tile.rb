@@ -27,5 +27,9 @@ module Map
       [P1,P2,P3,P4,P5,P6].map { |p| p.join(',') }.join(' ')
     end
 
+    def self.points
+      Tile.new.points
+    end
+
   end
 end
