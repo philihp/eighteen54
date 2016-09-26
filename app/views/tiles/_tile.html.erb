@@ -1,0 +1,94 @@
+<g transform="translate(<%= Map::Tile::W/2 * offset_x*2 %>,<%= Map::Tile::H * offset_y*0.75 %>)"
+   class="map-cell <%= "map-#{tile.color}" if tile.color.present?  %>">
+  <defs>
+    <clipPath id="hexmask">
+      <polygon
+        points="<%= Map::Tile.points %>">
+      </polygon>
+    </clipPath>
+  </defs>
+  <filter id="trackborder">
+    <feFlood result="rFlood" flood-color="white" />
+    <feMorphology result="rMorph" in="SourceGraphic" operator="dilate" radius="1"/>
+    <feColorMatrix result="rMask" in="rMorph" type="matrix"
+                   values="0 0 0 0 0
+                           0 0 0 0 0
+                           0 0 0 0 0
+                           0 0 0 1 0" />
+    <feComposite result="rComposite" in="rFlood" in2="rMask" operator="in" />
+    <feBlend result="rBlend" in="SourceGraphic" in2="rComposite" mode="normal" />
+    <feGaussianBlur result="rBlur" in="SourceAlpha" stdDeviation="1"/>
+    <feMerge>
+      <feMergeNode in="rBlur" />
+      <feMergeNode in="rBlend"/>
+    </feMerge>
+  </filter>
+  <filter id="cityborder">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="1" />
+    <feMerge>
+      <feMergeNode />
+      <feMergeNode in="SourceGraphic" />
+    </feMerge>
+  </filter>
+
+  <polygon class="tile-border"
+    points="<%= Map::Tile.points %>">
+  </polygon>
+  <g class="track-contents" clip-path="url(#hexmask)" style="filter:url(#trackborder)">
+  <%#  6 / \ 1
+        /   \
+      5|     |2
+        \   /
+       4 \ / 3
+      %>
+    <% if tile.has_connection?(1,6) %>
+      <!-- 6-1 --><circle cx="0" cy="<%=-Map::Tile::H/2 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(1,2) %>
+      <!-- 1-2 --><circle cx="<%= Map::Tile::W/2 %>" cy="<%=-Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(2,3) %>
+      <!-- 2-3 --><circle cx="<%= Map::Tile::W/2 %>" cy="<%= Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(3,4) %>
+      <!-- 3-4 --><circle cx="0" cy="<%= Map::Tile::H/2 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(4,5) %>
+      <!-- 4-5 --><circle cx="<%=-Map::Tile::W/2 %>" cy="<%= Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(5,6) %>
+      <!-- 5-6 --><circle cx="<%=-Map::Tile::W/2 %>" cy="<%=-Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(1,3) %>
+      <!-- 1-3 --><circle cx="<%= Map::Tile::W %>" cy="0" r="<%= Map::Tile::H*3/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(2,4) %>
+      <!-- 2-4 --><circle cx="<%= Map::Tile::W/2 %>" cy="<%= Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(3,5) %>
+      <!-- 3-5 --><circle cx="<%=-Map::Tile::W/2 %>" cy="<%= Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(4,6) %>
+      <!-- 4-6 --><circle cx="<%=-Map::Tile::W %>" cy="0" r="<%= Map::Tile::H*3/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(5,1) %>
+      <!-- 5-1 --><circle cx="<%=-Map::Tile::W/2 %>" cy="<%=-Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(6,2) %>
+      <!-- 6-2 --><circle cx="<%= Map::Tile::W/2 %>" cy="<%=-Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
+    <% end %>
+    <% if tile.has_connection?(3,6) %>
+      <!-- 3-6 --><path d="M <%= Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
+                           L <%=-Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>" class="track"  class="tile-track"/>
+    <% end %>
+    <% if tile.has_connection?(1,4) %>
+      <!-- 1-4 --><path d="M <%=-Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
+                           L <%= Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>" class="track"  class="tile-track"/>
+    <% end %>
+    <% if tile.has_connection?(2,5) %>
+      <!-- 2-5 --><path d="M <%=-Map::Tile::W/2 %> 0
+                           L <%= Map::Tile::W/2 %> 0" class="track" />
+    <% end %>
+  </g>
+  <circle class="tile-city" cx="0" cy="0" r="<%= Map::Tile::H/7 %>" filter="url(#cityborder)" />
+</g>

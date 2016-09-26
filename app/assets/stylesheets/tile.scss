@@ -7,15 +7,19 @@
   stroke: hsl(0, 0%, 80%);
   stroke-width: 0.5;
 
-  .tile-contents {
+  .track-contents {
     fill: none;
-
-    .tile-track {
-      stroke-width: 3;
-      stroke: #3f3f3f;
+    .track {
+      stroke-width: 2.5;
+      stroke: #000000;
     }
   }
 
+  .tile-city {
+    stroke-width: 1;
+    stroke: black;
+    fill: white;
+  }
 }
 
 .map-cell:hover {

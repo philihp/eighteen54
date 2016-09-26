@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'tile/view'
 
   get 'welcome/index'
   root 'welcome#index'
 
+  resources :tiles
   resources :instances do
     resources :players
     resources :companies do
