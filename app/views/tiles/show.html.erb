@@ -1,9 +1,10 @@
 <%= stylesheet_link_tag 'tile', media: 'all', 'data-turbolinks-track': 'reload' %>
 
-<svg id="local-map" width="<%= 2+ Map::Tile::W * 10 %>" height="<%= 2+ Map::Tile::H * 12.5 %>">
+<svg id="local-map" width="<%= 2+ Map::Tile::W * 12 %>" height="<%= 2+ Map::Tile::H * 12.5 %>">
   <g class="map-row">
-    <% Map::Tile::M.keys.each_with_index do |key,i| %>
-      <%= render 'tile', offset_x: 1+i%6 + (i/6%2/2.0), offset_y: 1+i/6, tile: Map::Tile.new(Map::Tile::M[key])  %>
+    <%= render 'tile', offset_x: 1.5, offset_y: 1, tile: Map::Tile.new  %>
+    <% Map::Tile::N.each_with_index do |key,i| %>
+      <%= render 'tile', offset_x: 1+i%10 + (i/10%2/2.0), offset_y: 2+i/10, tile: Map::Tile.new(Map::Tile::M[key])  %>
     <% end %>
   </g>
 </svg>

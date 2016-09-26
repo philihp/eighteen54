@@ -1,6 +1,6 @@
 <% if instance.operating_round_1? || instance.operating_round_2? || instance.operating_round_3? %>
 
-  <b>Active Company</b> <%= instance.active_company.name %>
+  <b>Active Company</b> <%= instance.active_company.try(:name) %>
   |
   <b>Activity</b> <%= instance.from_round.activity %>
 

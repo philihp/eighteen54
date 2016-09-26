@@ -42,53 +42,113 @@
        4 \ / 3
       %>
     <% if tile.has_connection?(1,6) %>
-      <!-- 6-1 --><circle cx="0" cy="<%=-Map::Tile::H/2 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+      <circle cx="0" cy="<%=-Map::Tile::H/2 %>" r="<%= Map::Tile::H/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(1,2) %>
-      <!-- 1-2 --><circle cx="<%= Map::Tile::W/2 %>" cy="<%=-Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+      <circle cx="<%= Map::Tile::W/2 %>" cy="<%=-Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(2,3) %>
-      <!-- 2-3 --><circle cx="<%= Map::Tile::W/2 %>" cy="<%= Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+      <circle cx="<%= Map::Tile::W/2 %>" cy="<%= Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+      <% if tile.towns == 1 %>
+        <path d="M <%= Map::Tile::W*(0.70/4.0) %> <%= Map::Tile::H*(0.70/8.0) %>
+                 L <%= Map::Tile::W*(0.675/2.0) %> <%= Map::Tile::H*(0.675/4.0) %>" class="track"  class="tile-track"/>
+      <% end %>
     <% end %>
     <% if tile.has_connection?(3,4) %>
-      <!-- 3-4 --><circle cx="0" cy="<%= Map::Tile::H/2 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+      <circle cx="0" cy="<%= Map::Tile::H/2 %>" r="<%= Map::Tile::H/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(4,5) %>
-      <!-- 4-5 --><circle cx="<%=-Map::Tile::W/2 %>" cy="<%= Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+      <circle cx="<%=-Map::Tile::W/2 %>" cy="<%= Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(5,6) %>
-      <!-- 5-6 --><circle cx="<%=-Map::Tile::W/2 %>" cy="<%=-Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
+      <circle cx="<%=-Map::Tile::W/2 %>" cy="<%=-Map::Tile::H/4 %>" r="<%= Map::Tile::H/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(1,3) %>
-      <!-- 1-3 --><circle cx="<%= Map::Tile::W %>" cy="0" r="<%= Map::Tile::H*3/4 %>" class="track" />
+      <circle cx="<%= Map::Tile::W %>" cy="0" r="<%= Map::Tile::H*3/4 %>" class="track" />
+      <% if tile.towns == 1 %>
+        <path d="M <%= Map::Tile::H*0.02 %> 0
+                 L <%= Map::Tile::H*0.20 %> 0" class="track"  class="tile-track"/>
+      <% end %>
     <% end %>
     <% if tile.has_connection?(2,4) %>
-      <!-- 2-4 --><circle cx="<%= Map::Tile::W/2 %>" cy="<%= Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
+      <circle cx="<%= Map::Tile::W/2 %>" cy="<%= Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(3,5) %>
-      <!-- 3-5 --><circle cx="<%=-Map::Tile::W/2 %>" cy="<%= Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
+      <circle cx="<%=-Map::Tile::W/2 %>" cy="<%= Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(4,6) %>
-      <!-- 4-6 --><circle cx="<%=-Map::Tile::W %>" cy="0" r="<%= Map::Tile::H*3/4 %>" class="track" />
+      <circle cx="<%=-Map::Tile::W %>" cy="0" r="<%= Map::Tile::H*3/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(5,1) %>
-      <!-- 5-1 --><circle cx="<%=-Map::Tile::W/2 %>" cy="<%=-Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
+      <circle cx="<%=-Map::Tile::W/2 %>" cy="<%=-Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(6,2) %>
-      <!-- 6-2 --><circle cx="<%= Map::Tile::W/2 %>" cy="<%=-Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
+      <circle cx="<%= Map::Tile::W/2 %>" cy="<%=-Map::Tile::H*3/4 %>" r="<%= Map::Tile::H*3/4 %>" class="track" />
     <% end %>
     <% if tile.has_connection?(3,6) %>
-      <!-- 3-6 --><path d="M <%= Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
+      <path d="M <%= Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
                            L <%=-Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>" class="track"  class="tile-track"/>
+      <% if tile.towns == 1 %>
+        <path d="M <%=-Map::Tile::H*0.35/4 %> <%= Map::Tile::H*0.11/2 %>
+                 L <%= Map::Tile::H*0.35/4 %> <%=-Map::Tile::H*0.11/2 %>" class="track"  class="tile-track"/>
+      <% end %>
     <% end %>
     <% if tile.has_connection?(1,4) %>
-      <!-- 1-4 --><path d="M <%=-Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
+      <path d="M <%=-Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>
                            L <%= Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>" class="track"  class="tile-track"/>
     <% end %>
     <% if tile.has_connection?(2,5) %>
-      <!-- 2-5 --><path d="M <%=-Map::Tile::W/2 %> 0
+      <path d="M <%=-Map::Tile::W/2 %> 0
                            L <%= Map::Tile::W/2 %> 0" class="track" />
     <% end %>
+    <% if tile.has_connection?(0,1) %>
+      <path d="M 0 0 L <%= Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>" class="track"  class="tile-track"/>
+    <% end %>
+    <% if tile.has_connection?(0,2) %>
+      <path d="M 0 0 L <%= Map::Tile::W/2 %> 0" class="track"  class="tile-track"/>
+    <% end %>
+    <% if tile.has_connection?(0,3) %>
+      <path d="M 0 0 L <%= Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>" class="track"  class="tile-track"/>
+    <% end %>
+    <% if tile.has_connection?(0,4) %>
+      <path d="M 0 0 L <%=-Map::Tile::W/4 %> <%= Map::Tile::H*3/8 %>" class="track"  class="tile-track"/>
+    <% end %>
+    <% if tile.has_connection?(0,5) %>
+      <path d="M 0 0 L <%=-Map::Tile::W/2 %> 0" class="track"  class="tile-track"/>
+    <% end %>
+    <% if tile.has_connection?(0,6) %>
+      <path d="M 0 0 L <%=-Map::Tile::W/4 %> <%=-Map::Tile::H*3/8 %>" class="track"  class="tile-track"/>
+    <% end %>
+
+
+    <% if tile.towns.present? %>
+      <%# TODO: the double-town tiles need dealies %>
+      <%# TODO: need single-town, doulbe-town and single-city plain tiles %>
+      <%# TODO: probably bout time to start decorating the base map, which has mountains and rivers, and tunnel-only tiles %>
+      <%# TODO: need to figure out how to print tunnels %>
+      <%# TODO: wein tiles are unfinished %>
+    <% end %>
   </g>
-  <circle class="tile-city" cx="0" cy="0" r="<%= Map::Tile::H/7 %>" filter="url(#cityborder)" />
+  <g class="city-border" filter="url(#cityborder)">
+    <% if tile.cities == 1 %>
+      <circle class="tile-city" cx="0" cy="0" r="<%= Map::Tile::H/7 %>"  />
+    <% elsif tile.cities == 2 %>
+      <!-- rect x="<%=-Map::Tile::W/7.0 %>" y="<%=-Map::Tile::W/7.0 %>" height="<%= Map::Tile::W*2/7.0 %>" width="<%= Map::Tile::W*2/7.0 %>" fill="white" class="city-border" /-->
+      <rect x="-10.714285714285714" y="<%=-Map::Tile::H/7 %>" height="<%= 10.714285714285714*2 %>" width="<%= 10.714285714285714*2 %>" fill="white" class="city-border" />
+      <circle class="tile-city" r="<%= Map::Tile::H/7 %>" cx="0" cy="<%=-Map::Tile::H/7 %>" />
+      <circle class="tile-city" r="<%= Map::Tile::H/7 %>" cx="0" cy="<%= Map::Tile::H/7 %>" />
+    <% elsif tile.cities == 3 %>
+      <path d="M <%=-Map::Tile::H*(1/7.0) %> <%= Map::Tile::H * (1 + Map::Tile::ROOT_3)/(7 * Map::Tile::ROOT_3) %>
+               L <%= Map::Tile::H*(1/7.0) %> <%= Map::Tile::H * (1 + Map::Tile::ROOT_3)/(7 * Map::Tile::ROOT_3) %>
+               L 18 -2
+               L 9 -17.5 <%# ugh i couldn't figure these out, so here's an eyeballed close enough %>
+               L -9 -17.5
+               L -18 -2
+               Z" class="city-border" fill="white" />
+      <circle class="tile-city" r="<%= Map::Tile::H/7 %>" cx="0" cy="<%=-Map::Tile::H*2/(7*Map::Tile::ROOT_3) %>" />
+      <circle class="tile-city" r="<%= Map::Tile::H/7 %>" cx="<%=-Map::Tile::H/7 %>" cy="<%= Map::Tile::H/(7*Map::Tile::ROOT_3) %>" />
+      <circle class="tile-city" r="<%= Map::Tile::H/7 %>" cx="<%= Map::Tile::H/7 %>" cy="<%= Map::Tile::H/(7*Map::Tile::ROOT_3) %>" />
+    <% else %>
+    <% end %>
+  </g>
 </g>

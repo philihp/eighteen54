@@ -4,13 +4,13 @@
 
 .map-cell {
   pointer-events: visiblePainted;
-  stroke: hsl(0, 0%, 80%);
+  stroke: hsla(0, 0%, 0%, 0.2);
   stroke-width: 0.5;
 
   .track-contents {
     fill: none;
     .track {
-      stroke-width: 2.5;
+      stroke-width: 4;
       stroke: #000000;
     }
   }
@@ -20,28 +20,44 @@
     stroke: black;
     fill: white;
   }
+
+  .city-border {
+    stroke-width: 1;
+    stroke: black;
+    fill: white;
+  }
 }
 
 .map-cell:hover {
-  fill: hsl(60, 10%, 90%);
+  fill: #b3cde3;
 }
 
 .map-cell {
-  fill: #f7fcf0;
+  #fill: #f7fcf0;
+  fill: #e5d8bd;
 }
 
 .map-yellow {
-  fill: #e0f3db;
+  #fill: #e0f3db;
+  fill: #ffffcc;
 }
 
 .map-green {
+  #fill: #ccebc5;
   fill: #ccebc5;
 }
 
 .map-brown {
-  fill: #a8ddb5;
+  #fill: #a8ddb5;
+  fill: #fed9a6;
 }
 
 .map-grey {
-  fill: #7bccc4;
+  #fill: #7bccc4;
+  fill: #f2f2f2;
 }
+
+.map-red {
+  fill: #fbb4ae;
+}
+
