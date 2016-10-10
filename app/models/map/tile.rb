@@ -113,6 +113,7 @@ module Map
     attr_accessor :connections
     attr_accessor :cities
     attr_accessor :towns
+    attr_accessor :noborder
 
     def initialize(type={})
       if type.is_a? Hash
@@ -126,6 +127,7 @@ module Map
       @connections= @options[:connections] || []
       @cities = @options[:cities] || 0
       @towns = @options[:towns] || 0
+      @noborder = @options[:noborder]
     end
 
     def points
@@ -138,6 +140,30 @@ module Map
 
     def has_connection?(src,dst)
       @connections.include?([src,dst]) || @connections.include?([dst,src])
+    end
+
+    def mountain
+      @options[:mountain]
+    end
+
+    def river
+      @options[:river]
+    end
+
+    def label
+      @options[:label]
+    end
+
+    def polygon_class
+      if @noborder
+        "map-noborder"
+      elsif @color.present?
+        "map-#{@color}"
+      elsif @options[:tunnel]
+        "map-white"
+      else
+        "map-cell"
+      end
     end
 
   end

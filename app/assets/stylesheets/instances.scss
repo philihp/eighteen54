@@ -69,14 +69,3 @@
     }
   }
 }
-
-.map-cell {
-  pointer-events: visiblePainted;
-  fill: hsl(60,10%,95%);
-  stroke: hsl(0, 0%, 80%);
-  stroke-width: 0.5;
-}
-
-.map-cell:hover {
-  fill: hsl(60, 10%, 90%);
-}

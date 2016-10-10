@@ -26,6 +26,10 @@
     stroke: black;
     fill: white;
   }
+
+  .map-contents {
+    fill: black;
+  }
 }
 
 .map-cell:hover {
@@ -33,27 +37,22 @@
 }
 
 .map-cell {
-  #fill: #f7fcf0;
   fill: #e5d8bd;
 }
 
 .map-yellow {
-  #fill: #e0f3db;
   fill: #ffffcc;
 }
 
 .map-green {
-  #fill: #ccebc5;
   fill: #ccebc5;
 }
 
 .map-brown {
-  #fill: #a8ddb5;
   fill: #fed9a6;
 }
 
 .map-grey {
-  #fill: #7bccc4;
   fill: #f2f2f2;
 }
 
@@ -61,3 +60,19 @@
   fill: #fbb4ae;
 }
 
+.map-blue {
+  fill: #b3cde3;
+}
+
+.map-pink {
+  fill: #fddaec;
+}
+
+.map-white {
+  fill: #f2f2f2;
+}
+
+.map-noborder {
+  fill: none;
+  stroke: none;
+}
