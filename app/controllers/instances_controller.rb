@@ -80,6 +80,13 @@ class InstancesController < ApplicationController
     redirect_to @instance
   end
 
+  def bump_activity
+    @instance.from_round.bump_activity!
+    @instance.save
+    flash[:success] = "Activity bumpped"
+    redirect_to @instance
+  end
+
   def auction_pass
     unless @instance.from_round.instance_of? InstanceInAuction
       flash[:error] = "Can't pass in an auction unless the instance is currently in the auction phase"

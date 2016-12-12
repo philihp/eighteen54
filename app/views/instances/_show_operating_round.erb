@@ -2,6 +2,8 @@
 
   <b>Active Company</b> <%= instance.active_company.try(:name) %>
   |
+  <b>Treasury</b> <%= instance.active_company.try(:treasury) %>
+  |
   <b>Activity</b> <%= instance.from_round.activity %>
 
   <h3>Companies to Operate</h3>
@@ -11,6 +13,10 @@
       <li><%= company.id %> - <%= company.name %> - <%=company.turn_order %></li>
     <% end %>
   </ul>
+
+  <% if instance.from_round.activity_build_track? %>
+    <%= link_to 'Build Track', bump_activity_instance_path(@instance), class: 'btn btn-warning btn-sm', method: :post %>
+  <% end %>
 
   <h3>Market</h3>
 

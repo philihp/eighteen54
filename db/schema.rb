@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919031800) do
+ActiveRecord::Schema.define(version: 20161022085146) do
 
   create_table "bids", force: :cascade do |t|
     t.integer  "player_id"
@@ -88,6 +88,11 @@ ActiveRecord::Schema.define(version: 20160919031800) do
     t.integer  "option_price"
     t.index ["instance_id"], name: "index_players_on_instance_id"
     t.index ["optioned_share_id"], name: "index_players_on_optioned_share_id"
+  end
+
+  create_table "tiles", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

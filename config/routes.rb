@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
       post 'stock_pass'
       post 'create_stub'
+
+      post 'bump_activity'
     end
   end
 end
